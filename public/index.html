@@ -31,7 +31,7 @@ img{max-width:100%;display:block}
 .grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 0%,var(--dark) 75%)}
 
 /* ===== PARTICLE CANVAS ===== */
-#circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.8}
+#circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
 
 /* ===== SCROLL REVEAL ===== */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
@@ -653,7 +653,7 @@ section{position:relative;z-index:2}
 </footer>
 
 <script>
-/* ===== NEURAL SYNAPSE CANVAS ===== */
+/* ===== SUBTLE SYNAPSE CANVAS ===== */
 (function(){
   const c=document.getElementById('circuit-canvas');
   const ctx=c.getContext('2d');
@@ -661,207 +661,109 @@ section{position:relative;z-index:2}
   function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
   window.addEventListener('resize',resize);resize();
 
-  // --- NEURONS ---
-  const N=Math.min(160,Math.floor(w*h/8000));
+  const N=Math.min(70,Math.floor(w*h/18000));
   const neurons=[];
-  const COLS=[[43,142,175],[91,196,212],[70,120,200],[139,92,246],[60,180,190]];
+  const COLS=[[43,142,175],[91,196,212],[70,120,200]];
 
   for(let i=0;i<N;i++){
     const col=COLS[~~(Math.random()*COLS.length)];
-    // Dendrite angles (small branches radiating from each neuron)
-    const nDend=~~(Math.random()*4)+2;
-    const dends=[];
-    for(let d=0;d<nDend;d++){
-      const a=Math.random()*Math.PI*2;
-      const len=12+Math.random()*22;
-      dends.push({a,len,branches:Math.random()>.5?1:0});
-    }
     neurons.push({
       x:Math.random()*w,y:Math.random()*h,
-      vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
-      r:Math.random()*2+1.2,
-      col,dends,
+      vx:(Math.random()-.5)*.12,vy:(Math.random()-.5)*.12,
+      r:Math.random()*1.4+.6,col,
       phase:Math.random()*Math.PI*2,
-      fireTimer:Math.random()*600,
-      firing:0 // 0→1 during fire, fades back
+      fireTimer:~~(Math.random()*800)+400,
+      firing:0
     });
   }
 
-  // --- SYNAPTIC PULSES ---
   const pulses=[];
   function spawnPulse(a,b){
-    if(pulses.length>40)return;
-    // Compute a curved control point for the bezier
+    if(pulses.length>12)return;
     const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
-    const dx=b.x-a.x,dy=b.y-a.y;
-    const off=(Math.random()-.5)*60;
-    const cx=mx+(-dy/Math.sqrt(dx*dx+dy*dy+1))*off;
-    const cy=my+(dx/Math.sqrt(dx*dx+dy*dy+1))*off;
-    const col=a.col;
-    pulses.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,cx,cy,t:0,
-      speed:.012+Math.random()*.015,col,size:1.5+Math.random()*1.5});
+    const dx=b.x-a.x,dy=b.y-a.y,d=Math.sqrt(dx*dx+dy*dy+1);
+    const off=(Math.random()-.5)*40;
+    pulses.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,
+      cx:mx+(-dy/d)*off,cy:my+(dx/d)*off,
+      t:0,speed:.008+Math.random()*.008,col:a.col});
   }
-
-  // Bezier point helper
-  function bezPt(ax,ay,cx,cy,bx,by,t){
-    const u=1-t;
-    return{x:u*u*ax+2*u*t*cx+t*t*bx,y:u*u*ay+2*u*t*cy+t*t*by};
-  }
+  function bz(ax,ay,cx,cy,bx,by,t){const u=1-t;return{x:u*u*ax+2*u*t*cx+t*t*bx,y:u*u*ay+2*u*t*cy+t*t*by}}
 
   let frame=0;
-
   function loop(){
-    // Fade trail instead of full clear (ghosting effect)
-    ctx.fillStyle='rgba(6,6,10,.12)';
-    ctx.fillRect(0,0,w,h);
+    ctx.clearRect(0,0,w,h);
     frame++;
 
-    // --- AXON CONNECTIONS (curved organic lines) ---
+    // Connections — thin curved lines
     for(let i=0;i<neurons.length;i++){
       for(let j=i+1;j<neurons.length;j++){
-        const dx=neurons[i].x-neurons[j].x;
-        const dy=neurons[i].y-neurons[j].y;
+        const dx=neurons[i].x-neurons[j].x,dy=neurons[i].y-neurons[j].y;
         const d=Math.sqrt(dx*dx+dy*dy);
         if(d<200){
-          const alpha=(1-d/200)*.15;
-          const mx=(neurons[i].x+neurons[j].x)/2;
-          const my=(neurons[i].y+neurons[j].y)/2;
-          // Slight curve offset based on index for organic feel
-          const perpX=-(neurons[i].y-neurons[j].y)/d;
-          const perpY=(neurons[i].x-neurons[j].x)/d;
-          const curveAmt=Math.sin(i*j*.1)*20;
-          const cx2=mx+perpX*curveAmt;
-          const cy2=my+perpY*curveAmt;
-
+          const alpha=(1-d/200)*.08;
+          const mx=(neurons[i].x+neurons[j].x)/2,my=(neurons[i].y+neurons[j].y)/2;
+          const px=-(neurons[i].y-neurons[j].y)/d,py=(neurons[i].x-neurons[j].x)/d;
+          const ca=Math.sin(i*j*.1)*18;
           ctx.strokeStyle=`rgba(43,142,175,${alpha})`;
-          ctx.lineWidth=.6;
+          ctx.lineWidth=.4;
           ctx.beginPath();
           ctx.moveTo(neurons[i].x,neurons[i].y);
-          ctx.quadraticCurveTo(cx2,cy2,neurons[j].x,neurons[j].y);
+          ctx.quadraticCurveTo(mx+px*ca,my+py*ca,neurons[j].x,neurons[j].y);
           ctx.stroke();
-
-          // Synapse glow at midpoint when either neuron is firing
-          const fireMax=Math.max(neurons[i].firing,neurons[j].firing);
-          if(fireMax>.1){
-            const pt=bezPt(neurons[i].x,neurons[i].y,cx2,cy2,neurons[j].x,neurons[j].y,.5);
-            ctx.fillStyle=`rgba(91,196,212,${fireMax*.15})`;
-            ctx.beginPath();ctx.arc(pt.x,pt.y,3+fireMax*4,0,Math.PI*2);ctx.fill();
-          }
         }
       }
     }
 
-    // --- SYNAPTIC PULSES (travelling along curved paths) ---
-    if(frame%6===0){
-      // Pick a firing neuron to send pulse
-      const firing=neurons.filter(n=>n.firing>.3);
-      if(firing.length>0){
-        const src=firing[~~(Math.random()*firing.length)];
-        // Find a nearby neuron
-        for(const tgt of neurons){
-          if(tgt===src)continue;
-          const dx=src.x-tgt.x,dy=src.y-tgt.y;
-          if(Math.sqrt(dx*dx+dy*dy)<200&&Math.random()<.3){
-            spawnPulse(src,tgt);
-            break;
-          }
+    // Pulses
+    if(frame%12===0){
+      const src=neurons.filter(n=>n.firing>.2);
+      if(src.length){
+        const s=src[~~(Math.random()*src.length)];
+        for(const t of neurons){
+          if(t===s)continue;
+          const dx=s.x-t.x,dy=s.y-t.y;
+          if(Math.sqrt(dx*dx+dy*dy)<200&&Math.random()<.2){spawnPulse(s,t);break;}
         }
       }
     }
-
-    for(let s=pulses.length-1;s>=0;s--){
-      const p=pulses[s];
-      p.t+=p.speed;
+    for(let i=pulses.length-1;i>=0;i--){
+      const p=pulses[i];p.t+=p.speed;
       if(p.t>1){
-        // When pulse arrives, trigger a small fire on the target
-        for(const n of neurons){
-          const dx=n.x-p.bx,dy=n.y-p.by;
-          if(Math.sqrt(dx*dx+dy*dy)<30){n.firing=Math.min(n.firing+.4,1);break;}
-        }
-        pulses.splice(s,1);continue;
+        for(const n of neurons){const dx=n.x-p.bx,dy=n.y-p.by;if(Math.sqrt(dx*dx+dy*dy)<25){n.firing=Math.min(n.firing+.3,1);break;}}
+        pulses.splice(i,1);continue;
       }
-      const pt=bezPt(p.ax,p.ay,p.cx,p.cy,p.bx,p.by,p.t);
-      const alpha=Math.sin(p.t*Math.PI);
-
-      // Bright core
-      ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha*.9})`;
-      ctx.beginPath();ctx.arc(pt.x,pt.y,p.size,0,Math.PI*2);ctx.fill();
-      // Outer glow
-      ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha*.12})`;
-      ctx.beginPath();ctx.arc(pt.x,pt.y,p.size*7,0,Math.PI*2);ctx.fill();
-      // Trail (previous position)
-      const pt2=bezPt(p.ax,p.ay,p.cx,p.cy,p.bx,p.by,Math.max(0,p.t-.06));
-      ctx.strokeStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha*.35})`;
-      ctx.lineWidth=1;
-      ctx.beginPath();ctx.moveTo(pt2.x,pt2.y);ctx.lineTo(pt.x,pt.y);ctx.stroke();
+      const pt=bz(p.ax,p.ay,p.cx,p.cy,p.bx,p.by,p.t);
+      const a=Math.sin(p.t*Math.PI);
+      ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${a*.6})`;
+      ctx.beginPath();ctx.arc(pt.x,pt.y,1.5,0,Math.PI*2);ctx.fill();
+      ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${a*.06})`;
+      ctx.beginPath();ctx.arc(pt.x,pt.y,8,0,Math.PI*2);ctx.fill();
     }
 
-    // --- DRAW NEURONS ---
+    // Neurons
     for(const n of neurons){
-      n.phase+=.012;
-      n.fireTimer--;
-
-      // Spontaneous firing
-      if(n.fireTimer<=0){
-        n.firing=1;
-        n.fireTimer=300+Math.random()*500;
-      }
-
-      // Fade firing
-      n.firing*=.985;
-
-      const pulse=1+Math.sin(n.phase)*.15;
-      const r=n.r*pulse;
+      n.phase+=.008;n.fireTimer--;
+      if(n.fireTimer<=0){n.firing=1;n.fireTimer=500+~~(Math.random()*600);}
+      n.firing*=.99;
+      const r=n.r*(1+Math.sin(n.phase)*.1);
       const f=n.firing;
 
-      // --- Dendrites (small branches) ---
-      for(const d of n.dends){
-        const ex=n.x+Math.cos(d.a+n.phase*.1)*d.len;
-        const ey=n.y+Math.sin(d.a+n.phase*.1)*d.len;
-        ctx.strokeStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.12+f*.2})`;
-        ctx.lineWidth=.5;
-        ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(ex,ey);ctx.stroke();
-        // Dendrite tip
-        ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.2+f*.3})`;
-        ctx.beginPath();ctx.arc(ex,ey,.8,0,Math.PI*2);ctx.fill();
-        // Sub-branch
-        if(d.branches){
-          const bx=ex+Math.cos(d.a+.6)*d.len*.4;
-          const by=ey+Math.sin(d.a+.6)*d.len*.4;
-          ctx.strokeStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.06+f*.1})`;
-          ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(bx,by);ctx.stroke();
-        }
-      }
-
-      // --- Soma (cell body) ---
-      // Outer glow (stronger when firing)
+      // Soft glow when firing
       if(f>.05){
-        ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${f*.08})`;
-        ctx.beginPath();ctx.arc(n.x,n.y,r*10+f*15,0,Math.PI*2);ctx.fill();
+        ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${f*.04})`;
+        ctx.beginPath();ctx.arc(n.x,n.y,r*8,0,Math.PI*2);ctx.fill();
       }
-      // Mid glow
-      ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.04+f*.1})`;
-      ctx.beginPath();ctx.arc(n.x,n.y,r*4,0,Math.PI*2);ctx.fill();
-      // Core
-      ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.45+f*.5})`;
+      // Core dot
+      ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.25+f*.35})`;
       ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);ctx.fill();
-      // Bright center
-      ctx.fillStyle=`rgba(255,255,255,${.1+f*.4})`;
-      ctx.beginPath();ctx.arc(n.x,n.y,r*.4,0,Math.PI*2);ctx.fill();
 
-      // Move (slow organic drift)
-      n.x+=n.vx;n.y+=n.vy;
-      // Gentle oscillation
-      n.x+=Math.sin(n.phase*.7)*.15;
-      n.y+=Math.cos(n.phase*.5)*.15;
-      if(n.x<-30)n.x=w+30;if(n.x>w+30)n.x=-30;
-      if(n.y<-30)n.y=h+30;if(n.y>h+30)n.y=-30;
+      n.x+=n.vx+Math.sin(n.phase*.5)*.08;
+      n.y+=n.vy+Math.cos(n.phase*.4)*.08;
+      if(n.x<-20)n.x=w+20;if(n.x>w+20)n.x=-20;
+      if(n.y<-20)n.y=h+20;if(n.y>h+20)n.y=-20;
     }
-
     requestAnimationFrame(loop);
   }
-  // Initial clear
-  ctx.fillStyle='rgba(6,6,10,1)';ctx.fillRect(0,0,w,h);
   loop();
 })();
 
