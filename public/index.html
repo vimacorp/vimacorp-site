@@ -31,7 +31,7 @@ img{max-width:100%;display:block}
 .grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 0%,var(--dark) 75%)}
 
 /* ===== PARTICLE CANVAS ===== */
-#circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45}
+#circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9}
 
 /* ===== SCROLL REVEAL ===== */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
@@ -88,7 +88,7 @@ section{position:relative;z-index:2}
 @keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(91,196,212,.6)}50%{opacity:.3;box-shadow:0 0 2px rgba(91,196,212,.2)}}
 
 .hero h1{font-size:62px;font-weight:900;line-height:1.06;letter-spacing:-3px;margin-bottom:28px}
-.hero h1 .accent{background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero h1 .accent{background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
 .hero-sub{font-size:18px;color:var(--g400);line-height:1.75;margin-bottom:40px;max-width:560px}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
 
@@ -117,10 +117,12 @@ section{position:relative;z-index:2}
 .trust{padding:80px 0;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
 .trust-label{text-align:center;font-size:13px;color:var(--g500);font-weight:500;margin-bottom:40px;letter-spacing:.5px}
 .trust-logos{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}
-.trust-logo-card{width:180px;height:100px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.15);transition:all .3s;padding:20px}
-.trust-logo-card:hover{background:#fff;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.2)}
-.trust-logo-card img{max-height:44px;max-width:120px;opacity:1;transition:all .3s;object-fit:contain}
-.trust-logo-card:hover img{transform:scale(1.05)}
+.trust-logo-card{width:200px;height:90px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);transition:all .4s;padding:22px 32px;position:relative;overflow:hidden}
+.trust-logo-card::before{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(43,142,175,.03),rgba(139,92,246,.02));opacity:0;transition:opacity .4s}
+.trust-logo-card:hover{border-color:rgba(91,196,212,.25);transform:translateY(-4px);box-shadow:0 16px 48px rgba(43,142,175,.1);background:rgba(255,255,255,.06)}
+.trust-logo-card:hover::before{opacity:1}
+.trust-logo-card img{max-height:48px;max-width:140px;opacity:.85;transition:all .4s;object-fit:contain;filter:brightness(0) invert(1);position:relative;z-index:1}
+.trust-logo-card:hover img{opacity:1;transform:scale(1.08)}
 
 /* stats removed */
 
@@ -138,7 +140,8 @@ section{position:relative;z-index:2}
 .feature-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
 .feature-card{background:var(--card);border:1px solid var(--card-border);border-radius:16px;padding:28px;transition:all .3s}
 .feature-card:hover{border-color:rgba(255,255,255,.16);background:rgba(22,22,36,.9)}
-.feature-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;font-weight:800}
+.feature-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;font-weight:800}
+.feature-icon svg{width:22px;height:22px;stroke-width:1.8}
 .feature-icon.blue{background:rgba(43,142,175,.12);color:var(--cyan)}
 .feature-icon.orange{background:rgba(249,115,22,.12);color:var(--orange)}
 .feature-card h4{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
@@ -239,8 +242,8 @@ section{position:relative;z-index:2}
   .footer-inner{flex-direction:column;text-align:center;align-items:center}
   .final-cta h2{font-size:34px}
   .hero-ctas{flex-direction:column;align-items:flex-start}
-  .trust-logos{gap:16px}
-  .trust-logo-card{width:140px;height:80px;padding:16px}
+  .trust-logos{gap:14px}
+  .trust-logo-card{width:150px;height:72px;padding:16px 20px}
 }
 </style>
 </head>
@@ -278,7 +281,7 @@ section{position:relative;z-index:2}
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge reveal"><span class="dot"></span> Tech & AI for Retail Ecosystems</div>
-      <h1 class="reveal reveal-d1">Ferramentas inteligentes para<br><span class="accent">marketplaces brasileiros.</span></h1>
+      <h1 class="reveal reveal-d1">Ferramentas inteligentes para <span class="accent">marketplaces brasileiros.</span></h1>
       <p class="hero-sub reveal reveal-d2">Tributos complexos, comissões variáveis, margens apertadas. Construímos as ferramentas que faltavam para vendedores tomarem decisões com dados reais.</p>
       <div class="hero-ctas reveal reveal-d3">
         <a href="https://pricelab.vimacorp.com.br" class="btn-primary">Começar gratuitamente <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -375,38 +378,38 @@ section{position:relative;z-index:2}
 <section id="pricelab" class="product-section">
   <div class="container">
     <div class="product-header reveal">
-      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px"><img src="logos/pricelab-icon.svg" alt="PriceLab" style="width:44px;height:44px;border-radius:12px"><img src="logos/pricelab-wordmark.svg" alt="PriceLab" style="height:28px"></div>
+      <div class="section-label">PriceLab</div>
       <h2 class="section-title">Precificação com inteligência fiscal</h2>
       <p class="section-sub">Importe sua nota fiscal e tenha preços otimizados para 4 marketplaces em segundos. Com todos os tributos, comissões e margem calculados automaticamente.</p>
     </div>
     <div class="feature-grid">
       <div class="feature-card reveal">
-        <div class="feature-icon blue">Tx</div>
+        <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="10" x2="8.01" y2="10"/><line x1="12" y1="10" x2="12.01" y2="10"/><line x1="16" y1="10" x2="16.01" y2="10"/><line x1="8" y1="14" x2="8.01" y2="14"/><line x1="12" y1="14" x2="12.01" y2="14"/><line x1="16" y1="14" x2="16.01" y2="14"/><line x1="8" y1="18" x2="12" y2="18"/></svg></div>
         <h4>Cálculo tributário completo</h4>
         <p>ICMS-ST, IPI, MVA, DAS Simples Nacional calculados automaticamente a partir da NF-e. Sem mais planilhas manuais de impostos.</p>
       </div>
       <div class="feature-card reveal reveal-d1">
-        <div class="feature-icon blue">%</div>
+        <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="5" x2="5" y2="19"/><circle cx="6.5" cy="6.5" r="2.5"/><circle cx="17.5" cy="17.5" r="2.5"/></svg></div>
         <h4>Comissões por marketplace</h4>
         <p>Comissões reais por categoria para Mercado Livre, Amazon, Shopee e TikTok Shop. Magalu, SHEIN e Kwai em breve.</p>
       </div>
       <div class="feature-card reveal reveal-d2">
-        <div class="feature-icon blue">NF</div>
+        <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><line x1="10" y1="9" x2="8" y2="9"/></svg></div>
         <h4>Importação de NF-e</h4>
         <p>Importe notas fiscais em XML ou PDF. O sistema extrai automaticamente todos os dados fiscais e de custo dos produtos.</p>
       </div>
       <div class="feature-card reveal reveal-d3">
-        <div class="feature-icon blue">Kit</div>
+        <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.27 6.96 12 12.01 20.73 6.96"/><line x1="12" y1="22.08" x2="12" y2="12"/></svg></div>
         <h4>Criação de kits</h4>
         <p>Monte kits combinando produtos diferentes. O custo, tributos e preço final são recalculados automaticamente para o combo.</p>
       </div>
       <div class="feature-card reveal">
-        <div class="feature-icon blue">Ad</div>
+        <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg></div>
         <h4>Fichas de anúncio</h4>
         <p>Gere fichas prontas para publicar em cada marketplace. Título, preço, margem e informações do produto em um clique.</p>
       </div>
       <div class="feature-card reveal reveal-d1">
-        <div class="feature-icon blue">R$</div>
+        <div class="feature-icon blue"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/><polyline points="17 6 23 6 23 12"/></svg></div>
         <h4>ROI e margem em tempo real</h4>
         <p>Acompanhe o ROI e a margem líquida real de cada produto em cada marketplace. Atualizados automaticamente ao alterar qualquer variável.</p>
       </div>
@@ -428,32 +431,32 @@ section{position:relative;z-index:2}
     </div>
     <div class="feature-grid">
       <div class="feature-card reveal">
-        <div class="feature-icon orange">AI</div>
+        <div class="feature-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l1.09 3.26L16.36 6l-3.27.74L12 10l-1.09-3.26L7.64 6l3.27-.74L12 2z"/><path d="M5 13l.55 1.63L7 15.18l-1.45.37L5 17.18l-.55-1.63L3 15.18l1.45-.37L5 13z"/><path d="M19 13l.55 1.63L21 15.18l-1.45.37L19 17.18l-.55-1.63L17 15.18l1.45-.37L19 13z"/></svg></div>
         <h4>Análise com inteligência artificial</h4>
         <p>IA analisa cada produto cruzando dados de mercado, tendências culturais, apelo social e diferencial de design para pontuar potencial.</p>
       </div>
       <div class="feature-card reveal reveal-d1">
-        <div class="feature-icon orange">Ds</div>
+        <div class="feature-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
         <h4>Score de disrupção</h4>
         <p>Cada produto recebe um score baseado em vacância de mercado, diferencial de design, tendências culturais e apelo social.</p>
       </div>
       <div class="feature-card reveal reveal-d2">
-        <div class="feature-icon orange">AB</div>
+        <div class="feature-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg></div>
         <h4>Curva ABC de lucratividade</h4>
         <p>Classifica automaticamente os produtos do catálogo em A, B e C por potencial de lucratividade estimado em cada canal.</p>
       </div>
       <div class="feature-card reveal reveal-d3">
-        <div class="feature-icon orange">Cl</div>
+        <div class="feature-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><line x1="7" y1="7" x2="7.01" y2="7"/></svg></div>
         <h4>Classificação inteligente</h4>
         <p>Cada produto recebe uma ação: COMPRAR, COTAR, AVALIAR ou IGNORAR. Decisões de compra baseadas em dados, não intuição.</p>
       </div>
       <div class="feature-card reveal">
-        <div class="feature-icon orange">Ch</div>
+        <div class="feature-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
         <h4>Análise multi-canal</h4>
         <p>Avalia potencial do produto em Mercado Livre, Amazon, Shopee e TikTok Shop individualmente. O que vende bem em um pode não vender em outro.</p>
       </div>
       <div class="feature-card reveal reveal-d1">
-        <div class="feature-icon orange">In</div>
+        <div class="feature-icon orange"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/><polyline points="12 11 12 17"/><polyline points="9 14 12 11 15 14"/></svg></div>
         <h4>Importação de catálogos</h4>
         <p>Importe catálogos em PDF ou Excel diretamente do fornecedor. O sistema extrai e organiza os dados automaticamente para análise.</p>
       </div>
@@ -650,7 +653,7 @@ section{position:relative;z-index:2}
 </footer>
 
 <script>
-/* ===== CIRCUIT BOARD CANVAS ===== */
+/* ===== AGGRESSIVE CIRCUIT CANVAS ===== */
 (function(){
   const c=document.getElementById('circuit-canvas');
   const ctx=c.getContext('2d');
@@ -658,81 +661,162 @@ section{position:relative;z-index:2}
   function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
   window.addEventListener('resize',resize);resize();
 
-  // Particles
-  const N=Math.min(100,Math.floor(w*h/12000));
+  // --- GRID ---
+  const GRID=80;
+
+  // --- PARTICLES (many more, faster) ---
+  const N=Math.min(220,Math.floor(w*h/6000));
   const particles=[];
-  const COLORS=['rgba(43,142,175,.5)','rgba(91,196,212,.35)','rgba(139,92,246,.25)','rgba(43,142,175,.3)'];
+  const COLORS=[
+    [43,142,175],[91,196,212],[139,92,246],[91,196,212],[43,142,175],[100,160,220]
+  ];
 
   for(let i=0;i<N;i++){
+    const col=COLORS[~~(Math.random()*COLORS.length)];
     particles.push({
       x:Math.random()*w,y:Math.random()*h,
-      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,
-      r:Math.random()*1.8+.6,
-      c:COLORS[~~(Math.random()*COLORS.length)],
+      vx:(Math.random()-.5)*1.1,vy:(Math.random()-.5)*1.1,
+      r:Math.random()*2.2+.8,
+      col,
       phase:Math.random()*Math.PI*2,
-      isNode:Math.random()>.5
+      isNode:Math.random()>.4,
+      brightness:Math.random()*.5+.5
     });
   }
 
+  // --- DATA STREAMS (travelling pulses along connections) ---
+  const streams=[];
+  function spawnStream(){
+    if(streams.length>30)return;
+    const a=particles[~~(Math.random()*particles.length)];
+    const b=particles[~~(Math.random()*particles.length)];
+    if(a===b)return;
+    const dx=a.x-b.x,dy=a.y-b.y;
+    if(Math.sqrt(dx*dx+dy*dy)<250){
+      streams.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,t:0,speed:.015+Math.random()*.02,
+        col:COLORS[~~(Math.random()*COLORS.length)]});
+    }
+  }
+
+  let frame=0;
+
   function loop(){
     ctx.clearRect(0,0,w,h);
+    frame++;
 
-    // Draw connections
+    // --- Hexagonal grid pattern ---
+    ctx.strokeStyle='rgba(43,142,175,.04)';
+    ctx.lineWidth=.5;
+    for(let x=-GRID;x<w+GRID;x+=GRID){
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();
+    }
+    for(let y=-GRID;y<h+GRID;y+=GRID){
+      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
+    }
+    // Diagonal accent lines
+    ctx.strokeStyle='rgba(139,92,246,.02)';
+    for(let x=-h;x<w+h;x+=GRID*3){
+      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+h,h);ctx.stroke();
+    }
+
+    // --- Draw connections ---
     for(let i=0;i<particles.length;i++){
       for(let j=i+1;j<particles.length;j++){
         const dx=particles[i].x-particles[j].x;
         const dy=particles[i].y-particles[j].y;
         const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<180){
-          const alpha=(1-d/180)*.12;
-          ctx.strokeStyle=`rgba(43,142,175,${alpha})`;
-          ctx.lineWidth=.5;
-          ctx.beginPath();
-          // Circuit-style L-shaped lines for some connections
-          if(particles[i].isNode&&particles[j].isNode&&d<120){
+        if(d<240){
+          const alpha=(1-d/240)*.22;
+          // L-shaped circuit lines for nodes
+          if(particles[i].isNode&&particles[j].isNode&&d<160){
+            ctx.strokeStyle=`rgba(43,142,175,${alpha*1.3})`;
+            ctx.lineWidth=.8;
+            ctx.beginPath();
             ctx.moveTo(particles[i].x,particles[i].y);
             ctx.lineTo(particles[i].x,particles[j].y);
             ctx.lineTo(particles[j].x,particles[j].y);
+            ctx.stroke();
+            // Junction dot
+            ctx.fillStyle=`rgba(91,196,212,${alpha*2})`;
+            ctx.beginPath();
+            ctx.arc(particles[i].x,particles[j].y,1.5,0,Math.PI*2);
+            ctx.fill();
           }else{
+            ctx.strokeStyle=`rgba(91,196,212,${alpha})`;
+            ctx.lineWidth=.5;
+            ctx.beginPath();
             ctx.moveTo(particles[i].x,particles[i].y);
             ctx.lineTo(particles[j].x,particles[j].y);
+            ctx.stroke();
           }
-          ctx.stroke();
         }
       }
     }
 
-    // Draw particles
+    // --- Data streams ---
+    if(frame%8===0)spawnStream();
+    for(let s=streams.length-1;s>=0;s--){
+      const st=streams[s];
+      st.t+=st.speed;
+      if(st.t>1){streams.splice(s,1);continue;}
+      const x=st.ax+(st.bx-st.ax)*st.t;
+      const y=st.ay+(st.by-st.ay)*st.t;
+      const alpha=Math.sin(st.t*Math.PI)*.9;
+      // Bright pulse dot
+      ctx.fillStyle=`rgba(${st.col[0]},${st.col[1]},${st.col[2]},${alpha})`;
+      ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fill();
+      // Glow
+      ctx.fillStyle=`rgba(${st.col[0]},${st.col[1]},${st.col[2]},${alpha*.2})`;
+      ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fill();
+      // Trail
+      const tx=st.ax+(st.bx-st.ax)*Math.max(0,st.t-.08);
+      const ty=st.ay+(st.by-st.ay)*Math.max(0,st.t-.08);
+      ctx.strokeStyle=`rgba(${st.col[0]},${st.col[1]},${st.col[2]},${alpha*.4})`;
+      ctx.lineWidth=1.2;
+      ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(x,y);ctx.stroke();
+    }
+
+    // --- Draw particles ---
     for(const p of particles){
-      p.phase+=.01;
-      const pulse=1+Math.sin(p.phase)*.12;
+      p.phase+=.018;
+      const pulse=1+Math.sin(p.phase)*.2;
       const r=p.r*pulse;
+      const b=p.brightness;
 
-      ctx.fillStyle=p.c;
-      ctx.globalAlpha=.6;
-      ctx.beginPath();
-      if(p.isNode){
-        // Square nodes (circuit junctions)
-        ctx.fillRect(p.x-r,p.y-r,r*2,r*2);
-      }else{
-        ctx.arc(p.x,p.y,r,0,Math.PI*2);
-        ctx.fill();
-      }
-
-      // Subtle glow on larger nodes
-      if(r>1.4){
-        ctx.globalAlpha=.06;
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,r*5,0,Math.PI*2);
-        ctx.fill();
-      }
       ctx.globalAlpha=1;
+
+      if(p.isNode){
+        // Square node
+        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${.55*b})`;
+        ctx.fillRect(p.x-r,p.y-r,r*2,r*2);
+        // Border glow
+        ctx.strokeStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${.25*b})`;
+        ctx.lineWidth=.6;
+        ctx.strokeRect(p.x-r-1,p.y-r-1,r*2+2,r*2+2);
+      }else{
+        // Circle particle
+        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${.6*b})`;
+        ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();
+      }
+
+      // Glow halo on larger particles
+      if(r>1.8){
+        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${.06*b})`;
+        ctx.beginPath();ctx.arc(p.x,p.y,r*6,0,Math.PI*2);ctx.fill();
+      }
+
+      // Random bright flash
+      if(Math.random()<.0008){
+        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},.5)`;
+        ctx.beginPath();ctx.arc(p.x,p.y,r*12,0,Math.PI*2);ctx.fill();
+      }
 
       // Move
       p.x+=p.vx;p.y+=p.vy;
-      if(p.x<-10)p.x=w+10;if(p.x>w+10)p.x=-10;
-      if(p.y<-10)p.y=h+10;if(p.y>h+10)p.y=-10;
+      if(p.x<-20)p.x=w+20;if(p.x>w+20)p.x=-20;
+      if(p.y<-20)p.y=h+20;if(p.y>h+20)p.y=-20;
     }
+
     requestAnimationFrame(loop);
   }
   loop();
