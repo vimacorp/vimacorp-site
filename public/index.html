@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VIMA CORP | Tech & AI for Retail Ecosystems</title>
+<meta name="description" content="Ferramentas de inteligência artificial para e-commerce brasileiro. PriceLab — precificação estratégica para e-commerce.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0a'/><text x='50' y='42' font-family='system-ui' font-size='24' font-weight='900' fill='white' text-anchor='middle'>VIMA</text><text x='50' y='72' font-family='system-ui' font-size='24' font-weight='400' fill='%232B8EAF' text-anchor='middle'>CORP</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--dark:#06060a;--dark2:#0a0a12;--dark3:#12121a;--blue1:#0c2340;--blue2:#1a6fa0;--blue3:#2B8EAF;--cyan:#5BC4D4;--g400:#a1a1aa;--g500:#71717a;--g600:#52525b;--g700:#3f3f46;--orange:#f97316;--red:#ef4444}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--dark);color:#fff;overflow-x:hidden;-webkit-font-smoothing:antialiased}
+a{color:var(--cyan);text-decoration:none;transition:color .2s}
+
+/* GRID BACKGROUND (Linear.app style) */
+.grid-bg{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(43,142,175,.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(43,142,175,.03) 1px, transparent 1px);
+  background-size:64px 64px;
+}
+.grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 0%,var(--dark) 75%)}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(40px);transition:opacity .8s cubic-bezier(.16,1,.3,1),transform .8s cubic-bezier(.16,1,.3,1)}
+.reveal.visible{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:18px 0;transition:all .4s}
+.nav.scrolled{background:rgba(6,6,10,.85);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);border-bottom:1px solid rgba(255,255,255,.04);padding:12px 0}
+.ni{max-width:1140px;margin:0 auto;padding:0 32px;display:flex;align-items:center;justify-content:space-between}
+.nav-logo{display:flex;align-items:baseline;gap:1px;font-size:22px;letter-spacing:-1px;text-decoration:none}
+.nav-logo .v{font-weight:900;color:#fff}.nav-logo .c{font-weight:500;background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.nl{display:flex;align-items:center;gap:28px}
+.nl a{color:var(--g500);font-size:13px;font-weight:500;transition:color .2s}.nl a:hover{color:#fff}
+.nav-cta{padding:9px 22px;border-radius:8px;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--blue2),var(--cyan));color:#fff;transition:all .25s;text-decoration:none;position:relative;overflow:hidden}
+.nav-cta::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:left .5s}
+.nav-cta:hover::before{left:100%}
+.nav-cta:hover{box-shadow:0 4px 20px rgba(43,142,175,.4);color:#fff;transform:translateY(-1px)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:140px 0 80px}
+.glow1{position:absolute;top:-20%;left:-10%;width:800px;height:800px;background:radial-gradient(circle,rgba(43,142,175,.15) 0%,transparent 65%);pointer-events:none;animation:float1 8s ease-in-out infinite}
+.glow2{position:absolute;bottom:-25%;right:-15%;width:700px;height:700px;background:radial-gradient(circle,rgba(91,196,212,.1) 0%,transparent 65%);pointer-events:none;animation:float2 10s ease-in-out infinite}
+.glow3{position:absolute;top:30%;left:45%;width:500px;height:500px;background:radial-gradient(circle,rgba(12,35,64,.25) 0%,transparent 65%);pointer-events:none;animation:float3 12s ease-in-out infinite}
+@keyframes float1{0%,100%{transform:translate(0,0)}50%{transform:translate(40px,-30px)}}
+@keyframes float2{0%,100%{transform:translate(0,0)}50%{transform:translate(-30px,40px)}}
+@keyframes float3{0%,100%{transform:translate(-50%,-50%)}50%{transform:translate(-45%,-55%)}}
+
+.hero-inner{max-width:1140px;margin:0 auto;padding:0 32px;position:relative;z-index:2;display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-content{position:relative;z-index:2}
+
+/* Hero badge */
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(43,142,175,.06);border:1px solid rgba(43,142,175,.2);border-radius:100px;padding:7px 18px;font-size:11px;color:var(--cyan);font-weight:600;margin-bottom:32px;letter-spacing:.8px;text-transform:uppercase;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.hero-badge .dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 8px rgba(91,196,212,.6)}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(91,196,212,.6)}50%{opacity:.3;box-shadow:0 0 2px rgba(91,196,212,.2)}}
+
+.hero h1{font-size:64px;font-weight:900;line-height:1.04;letter-spacing:-3px;margin-bottom:28px}
+.hero h1 .ac{background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;position:relative}
+.hero h1 .ac::after{content:'';position:absolute;bottom:2px;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue3),var(--cyan));border-radius:2px;opacity:.3}
+.hero-sub{font-size:18px;color:var(--g400);max-width:520px;line-height:1.7;margin-bottom:36px}
+.hero-ctas{display:flex;gap:14px;align-items:center;margin-bottom:0}
+
+/* Primary button */
+.bp{background:linear-gradient(135deg,var(--blue2),var(--cyan));color:#fff;padding:16px 32px;border-radius:12px;font-size:14px;font-weight:700;border:none;cursor:pointer;transition:all .3s;display:inline-flex;align-items:center;gap:8px;text-decoration:none;position:relative;overflow:hidden}
+.bp::before{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transition:left .5s}
+.bp:hover::before{left:100%}
+.bp:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(43,142,175,.4);color:#fff}
+/* Secondary button */
+.bs{color:var(--g400);padding:16px 32px;border-radius:12px;font-size:14px;font-weight:600;border:1px solid var(--g700);background:none;display:inline-flex;align-items:center;gap:8px;text-decoration:none;transition:all .25s}
+.bs:hover{border-color:var(--g500);color:#fff;background:rgba(255,255,255,.03)}
+
+/* HERO MOCKUP */
+.hero-mockup{position:relative;perspective:1000px}
+.mockup-wrapper{transform:rotateY(-8deg) rotateX(4deg);transition:transform .6s cubic-bezier(.16,1,.3,1);animation:mockupFloat 6s ease-in-out infinite}
+.mockup-wrapper:hover{transform:rotateY(-2deg) rotateX(1deg)}
+@keyframes mockupFloat{0%,100%{transform:rotateY(-8deg) rotateX(4deg) translateY(0)}50%{transform:rotateY(-8deg) rotateX(4deg) translateY(-12px)}}
+
+.mockup-browser{background:var(--dark2);border:1px solid rgba(255,255,255,.08);border-radius:16px;overflow:hidden;box-shadow:0 40px 100px rgba(0,0,0,.6),0 0 0 1px rgba(43,142,175,.1),0 0 80px rgba(43,142,175,.08)}
+.mockup-bar{display:flex;align-items:center;gap:8px;padding:14px 18px;background:rgba(255,255,255,.02);border-bottom:1px solid rgba(255,255,255,.05)}
+.mockup-dot{width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.08)}
+.mockup-dot:nth-child(1){background:rgba(239,68,68,.6)}.mockup-dot:nth-child(2){background:rgba(234,179,8,.6)}.mockup-dot:nth-child(3){background:rgba(34,197,94,.6)}
+.mockup-url{margin-left:12px;background:rgba(255,255,255,.04);border-radius:6px;padding:6px 14px;font-size:11px;color:var(--g500);flex:1;font-family:'Inter',monospace}
+.mockup-body{padding:24px;min-height:320px;position:relative;background:linear-gradient(180deg,rgba(12,35,64,.15) 0%,var(--dark2) 100%)}
+
+/* Mockup dashboard content */
+.mock-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+.mock-title{font-size:14px;font-weight:700;color:#fff}
+.mock-badge{font-size:9px;padding:4px 10px;border-radius:100px;background:rgba(91,196,212,.12);color:var(--cyan);font-weight:600}
+.mock-stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-bottom:20px}
+.mock-stat{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05);border-radius:10px;padding:14px}
+.mock-stat-label{font-size:9px;color:var(--g500);text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
+.mock-stat-value{font-size:20px;font-weight:800;letter-spacing:-1px}
+.mock-stat-value.green{color:#22c55e}.mock-stat-value.cyan{color:var(--cyan)}.mock-stat-value.white{color:#fff}
+.mock-table{width:100%}
+.mock-table-header{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:8px 12px;font-size:9px;color:var(--g600);text-transform:uppercase;letter-spacing:.8px;border-bottom:1px solid rgba(255,255,255,.04)}
+.mock-table-row{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:8px;padding:10px 12px;font-size:11px;color:var(--g400);border-bottom:1px solid rgba(255,255,255,.02);transition:background .2s}
+.mock-table-row:hover{background:rgba(255,255,255,.02)}
+.mock-tag{font-size:9px;padding:2px 8px;border-radius:4px;font-weight:600}
+.mock-tag.ml{background:rgba(255,230,0,.1);color:#ffe600}
+.mock-tag.az{background:rgba(255,153,0,.1);color:#ff9900}
+.mock-tag.sp{background:rgba(238,77,45,.1);color:#ee4d2d}
+
+/* SOCIAL PROOF / TRUSTED BY */
+.trust-strip{padding:80px 0 0;position:relative;z-index:1}
+.trust-inner{max-width:1140px;margin:0 auto;padding:0 32px;text-align:center}
+.trust-label{font-size:11px;color:var(--g600);text-transform:uppercase;letter-spacing:2px;font-weight:600;margin-bottom:32px}
+.trust-logos{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap}
+.trust-logo-item{display:flex;align-items:center;gap:12px;padding:16px 28px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;transition:all .3s;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.trust-logo-item:hover{background:rgba(255,255,255,.05);border-color:rgba(255,255,255,.1);transform:translateY(-2px);box-shadow:0 8px 30px rgba(0,0,0,.3)}
+.trust-logo-item img{height:24px;width:auto;opacity:.7;transition:opacity .3s}
+.trust-logo-item:hover img{opacity:1}
+.trust-logo-item span{font-size:13px;font-weight:600;color:var(--g400)}
+.trust-coming{display:flex;align-items:center;gap:24px;justify-content:center;margin-top:20px}
+.trust-coming span{font-size:11px;color:var(--g600);font-style:italic}
+
+/* STATS BAR */
+.stats-bar{padding:80px 0;position:relative;z-index:1;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04);background:rgba(255,255,255,.01)}
+.stats-bar::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 10%,rgba(43,142,175,.2) 50%,transparent 90%)}
+.stats-inner{max-width:1140px;margin:0 auto;padding:0 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
+.stat-item{text-align:center;position:relative}
+.stat-item:not(:last-child)::after{content:'';position:absolute;right:-20px;top:10%;height:80%;width:1px;background:rgba(255,255,255,.06)}
+.stat-number{font-size:56px;font-weight:900;letter-spacing:-2px;background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1.1}
+.stat-label{font-size:14px;color:var(--g500);margin-top:8px;line-height:1.6;max-width:260px;margin-left:auto;margin-right:auto}
+
+/* CIRCUIT - FULL PAGE */
+#cv{position:fixed;top:0;left:0;width:100%;height:100%;z-index:0;opacity:.3;pointer-events:none}
+
+/* SECTIONS */
+.sec{padding:140px 0;position:relative;z-index:1}
+.si{max-width:1140px;margin:0 auto;padding:0 32px}
+.sl{font-size:11px;font-weight:700;color:var(--cyan);text-transform:uppercase;letter-spacing:3px;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.sl::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent)}
+.st{font-size:52px;font-weight:900;letter-spacing:-2.5px;line-height:1.08;margin-bottom:18px;max-width:680px}
+.st .ac{background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.sd{font-size:17px;color:var(--g400);max-width:520px;line-height:1.7;margin-bottom:56px}
+
+/* DIVIDER GLOW */
+.sec-glow{position:absolute;top:-1px;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent 10%,rgba(43,142,175,.25) 50%,transparent 90%)}
+
+/* PAIN CARDS - Glassmorphism */
+.pg{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pc{background:rgba(12,12,20,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:40px;transition:all .4s;position:relative;overflow:hidden}
+.pc::before{content:'';position:absolute;inset:-1px;border-radius:20px;padding:1px;background:linear-gradient(135deg,rgba(43,142,175,.2),transparent 50%,rgba(91,196,212,.1));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s}
+.pc::after{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,rgba(43,142,175,.4),transparent);opacity:0;transition:opacity .4s}
+.pc:hover{transform:translateY(-8px);box-shadow:0 30px 80px rgba(0,0,0,.5),0 0 40px rgba(43,142,175,.05)}
+.pc:hover::before,.pc:hover::after{opacity:1}
+.pc .num{font-size:60px;font-weight:900;background:linear-gradient(135deg,rgba(43,142,175,.25),rgba(91,196,212,.1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;line-height:1;margin-bottom:18px}
+.pc h3{font-size:18px;font-weight:700;margin-bottom:12px;letter-spacing:-.3px}
+.pc p{font-size:13.5px;color:var(--g500);line-height:1.8}
+
+/* PRODUCTS */
+.prdg{display:grid;grid-template-columns:1fr 1fr;gap:28px}
+.prd{background:rgba(12,12,20,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.06);border-radius:24px;padding:48px;position:relative;overflow:hidden;transition:all .4s}
+.prd:hover{transform:translateY(-6px);box-shadow:0 30px 80px rgba(0,0,0,.5)}
+.prd::before{content:'';position:absolute;top:0;left:0;right:0;height:2px}
+.prd.pl::before{background:linear-gradient(90deg,var(--blue2),var(--cyan))}
+.prd.cq::before{background:linear-gradient(90deg,var(--orange),var(--red))}
+.prd::after{content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;opacity:0;transition:opacity .4s;pointer-events:none}
+.prd.pl::after{background:radial-gradient(circle at 30% 30%,rgba(43,142,175,.06),transparent 50%)}
+.prd.cq::after{background:radial-gradient(circle at 30% 30%,rgba(249,115,22,.06),transparent 50%)}
+.prd:hover::after{opacity:1}
+
+/* Product mini mockup */
+.prd-mini-mockup{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;margin-bottom:28px;position:relative;overflow:hidden}
+.prd-mini-mockup::before{content:'';position:absolute;inset:0;background:linear-gradient(180deg,transparent 60%,rgba(6,6,10,.8));z-index:1;pointer-events:none}
+.mini-mock-row{display:flex;gap:8px;margin-bottom:8px;align-items:center}
+.mini-mock-bar{height:6px;border-radius:3px;flex:1}
+.mini-mock-cell{height:28px;border-radius:6px;flex:1;background:rgba(255,255,255,.03)}
+.prd.pl .mini-mock-bar{background:linear-gradient(90deg,rgba(43,142,175,.3),rgba(91,196,212,.15))}
+.prd.cq .mini-mock-bar{background:linear-gradient(90deg,rgba(249,115,22,.3),rgba(239,68,68,.15))}
+
+.prd-icon{width:56px;height:56px;border-radius:16px;display:flex;align-items:center;justify-content:center;font-size:20px;font-weight:800;color:#fff;margin-bottom:24px;position:relative;z-index:1}
+.prd.pl .prd-icon{background:linear-gradient(135deg,var(--blue2),var(--cyan));box-shadow:0 8px 30px rgba(43,142,175,.3)}
+.prd.cq .prd-icon{background:linear-gradient(135deg,var(--orange),var(--red));box-shadow:0 8px 30px rgba(249,115,22,.25)}
+.prd .sub{font-size:11px;color:var(--g500);font-weight:600;text-transform:uppercase;letter-spacing:1.5px;margin-bottom:12px}
+.prd h3{font-size:26px;font-weight:800;margin-bottom:14px;letter-spacing:-.5px}
+.prd>p{font-size:14px;color:var(--g400);line-height:1.7;margin-bottom:28px}
+.pf{list-style:none;margin-bottom:32px}
+.pf li{font-size:13px;color:var(--g400);padding:10px 0;display:flex;align-items:center;gap:12px;border-bottom:1px solid rgba(255,255,255,.03)}
+.pf li .ck{width:20px;height:20px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:10px;flex-shrink:0;font-weight:700}
+.prd.pl .ck{background:rgba(43,142,175,.12);color:var(--cyan)}
+.prd.cq .ck{background:rgba(249,115,22,.1);color:var(--orange)}
+
+/* STEPS */
+.stw{display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-top:52px}
+.stc h4{font-size:16px;font-weight:700;margin-bottom:28px;display:flex;align-items:center;gap:10px}
+.stc h4 .ic{width:30px;height:30px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:#fff}
+.sti{display:flex;gap:16px;margin-bottom:24px;padding:18px;border-radius:14px;transition:all .3s;border:1px solid transparent}
+.sti:hover{background:rgba(255,255,255,.02);border-color:rgba(255,255,255,.04)}
+.stn{width:34px;height:34px;border-radius:50%;border:1.5px solid rgba(43,142,175,.3);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:700;color:var(--blue3);flex-shrink:0;margin-top:2px;background:rgba(43,142,175,.04)}
+.sti h5{font-size:14px;font-weight:700;margin-bottom:6px}
+.sti p{font-size:13px;color:var(--g500);line-height:1.7}
+
+/* PRICING */
+.prg{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;align-items:start;max-width:800px;margin:0 auto}
+.prc{background:rgba(12,12,20,.6);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border:1px solid rgba(255,255,255,.05);border-radius:24px;padding:44px;transition:all .4s;position:relative}
+.prc:hover{transform:translateY(-6px);box-shadow:0 24px 70px rgba(0,0,0,.5)}
+.prc.ft{border-color:rgba(43,142,175,.3);position:relative}
+.prc.ft::before{content:'OFERTA DE LANÇAMENTO';position:absolute;top:-14px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue2),var(--cyan));color:#fff;font-size:10px;font-weight:700;padding:6px 20px;border-radius:100px;letter-spacing:.8px;white-space:nowrap;box-shadow:0 4px 20px rgba(43,142,175,.4)}
+.prc.ft::after{content:'';position:absolute;inset:-1px;border-radius:24px;padding:1px;background:linear-gradient(135deg,rgba(43,142,175,.3),transparent 40%,transparent 60%,rgba(91,196,212,.15));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+.prn{font-size:13px;font-weight:600;color:var(--g500);text-transform:uppercase;letter-spacing:1px;margin-bottom:8px}
+.pro{font-size:14px;color:var(--g600);text-decoration:line-through;margin-bottom:4px}
+.prv{font-size:52px;font-weight:900;letter-spacing:-2px;margin-bottom:8px}
+.prv span{font-size:15px;font-weight:500;color:var(--g500)}
+.prd-desc{font-size:14px;color:var(--g400);margin-bottom:28px;line-height:1.6}
+.prfl{list-style:none;margin-bottom:28px}
+.prfl li{font-size:13px;color:var(--g400);padding:10px 0;display:flex;align-items:center;gap:10px;border-bottom:1px solid rgba(255,255,255,.03)}
+.prfl li::before{content:'';width:5px;height:5px;border-radius:50%;background:var(--blue3);flex-shrink:0}
+.promo{background:linear-gradient(135deg,rgba(43,142,175,.1),rgba(91,196,212,.04));border:1px solid rgba(43,142,175,.2);border-radius:14px;padding:18px;margin-bottom:24px;text-align:center;backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px)}
+.promo .b{font-size:14px;font-weight:700;color:var(--cyan)}
+.promo .s{font-size:11px;color:var(--g500);margin-top:4px}
+
+/* FAQ */
+.faq-list{max-width:700px;margin:0 auto}
+.fi{border-bottom:1px solid rgba(255,255,255,.04);padding:26px 0;cursor:pointer}
+.fq{font-size:15px;font-weight:600;display:flex;justify-content:space-between;align-items:center;gap:16px;transition:color .2s}
+.fi:hover .fq{color:var(--cyan)}
+.fq .ar{color:var(--g600);font-size:20px;transition:all .3s;flex-shrink:0;width:28px;height:28px;display:flex;align-items:center;justify-content:center;border-radius:50%;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.05)}
+.fa{font-size:14px;color:var(--g500);line-height:1.8;max-height:0;overflow:hidden;transition:max-height .5s ease,padding .3s}
+.fi.open .fa{max-height:400px;padding-top:16px}
+.fi.open .ar{transform:rotate(45deg);background:rgba(43,142,175,.15);color:var(--cyan);border-color:rgba(43,142,175,.3)}
+
+/* CTA */
+.cta-section{text-align:center;padding:140px 0 160px;position:relative;z-index:1}
+.cta-section::before{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:radial-gradient(ellipse at 50% 70%,rgba(43,142,175,.08) 0%,transparent 55%)}
+.cta-section h2{font-size:52px;font-weight:900;letter-spacing:-2.5px;margin-bottom:18px;position:relative;z-index:1;line-height:1.1}
+.cta-section h2 .ac{background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.cta-section p{font-size:18px;color:var(--g400);margin-bottom:40px;max-width:460px;margin-left:auto;margin-right:auto;position:relative;z-index:1}
+
+/* FOOTER */
+.ft{border-top:1px solid rgba(255,255,255,.04);padding:48px 0;position:relative;z-index:1}
+.fti{max-width:1140px;margin:0 auto;padding:0 32px;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px}
+.ftl{font-size:13px;color:var(--g600)}
+.ftlogo{font-size:16px;margin-bottom:4px}.ftlogo .fv{font-weight:900;color:var(--g400)}.ftlogo .fc{font-weight:400;color:var(--g600)}
+.ftlinks{display:flex;gap:24px}.ftlinks a{font-size:12px;color:var(--g500);transition:color .2s}.ftlinks a:hover{color:var(--cyan)}
+
+/* STICKY MOBILE CTA */
+.sticky-cta{position:fixed;bottom:0;left:0;right:0;z-index:99;padding:16px 20px;background:rgba(6,6,10,.92);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-top:1px solid rgba(255,255,255,.06);transform:translateY(100%);transition:transform .4s cubic-bezier(.16,1,.3,1);display:none}
+.sticky-cta.show{transform:translateY(0)}
+.sticky-cta a{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:16px;border-radius:12px;background:linear-gradient(135deg,var(--blue2),var(--cyan));color:#fff;font-weight:700;font-size:14px;text-decoration:none}
+
+/* Animated gradient border utility */
+@keyframes borderRotate{0%{--angle:0deg}100%{--angle:360deg}}
+@property --angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+
+/* Typewriter */
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+.typewriter-cursor{display:inline-block;width:2px;height:1em;background:var(--cyan);margin-left:2px;animation:blink 1s infinite;vertical-align:text-bottom}
+
+@media(max-width:768px){
+  .hero-inner{grid-template-columns:1fr;gap:40px}
+  .hero-mockup{display:none}
+  .hero h1{font-size:36px;letter-spacing:-1.5px}
+  .hero-sub{font-size:16px}
+  .hero-ctas{flex-direction:column;align-items:stretch}
+  .bp,.bs{justify-content:center;text-align:center}
+  .stats-inner{grid-template-columns:1fr;gap:32px}
+  .stat-item:not(:last-child)::after{display:none}
+  .stat-number{font-size:44px}
+  .pg,.prdg,.stw,.prg{grid-template-columns:1fr}
+  .nl{display:none}
+  .st{font-size:32px}
+  .fti{flex-direction:column;text-align:center}
+  .trust-logos{gap:16px}
+  .trust-logo-item{padding:12px 20px}
+  .sticky-cta{display:block}
+  .sec{padding:100px 0}
+  .mock-stats-row{grid-template-columns:1fr}
+}
+@media(min-width:769px){
+  .sticky-cta{display:none !important}
+}
+</style>
+</head>
+<body>
+
+<div class="grid-bg"></div>
+<canvas id="cv"></canvas>
+
+<nav class="nav" id="nav"><div class="ni">
+  <a href="#" class="nav-logo"><span class="v">VIMA</span><span class="c">CORP</span></a>
+  <div class="nl">
+    <a href="#produtos">Produtos</a><a href="#metodo">Método</a><a href="#planos">Planos</a><a href="#faq">FAQ</a>
+    <a href="https://pricelab.vimacorp.com.br" class="nav-cta">Acessar plataforma</a>
+  </div>
+</div></nav>
+
+<section class="hero">
+  <div class="glow1"></div><div class="glow2"></div><div class="glow3"></div>
+  <div class="hero-inner">
+    <div class="hero-content">
+      <div class="hero-badge"><span class="dot"></span>Inteligência fiscal para e-commerce</div>
+      <h1>Precifique com <span class="ac">inteligência.</span><br>Lucre com precisão.</h1>
+      <p class="hero-sub">Cada marketplace tem suas taxas. Cada estado tem suas regras tributárias. Nossas ferramentas calculam tudo automaticamente — para você operar com margem real, não estimativa.</p>
+      <div class="hero-ctas">
+        <a href="https://pricelab.vimacorp.com.br" class="bp">Começar gratuitamente <span style="font-size:18px">&#8594;</span></a>
+        <a href="#produtos" class="bs">Conhecer as ferramentas</a>
+      </div>
+    </div>
+    <div class="hero-mockup">
+      <div class="mockup-wrapper">
+        <div class="mockup-browser">
+          <div class="mockup-bar">
+            <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
+            <div class="mockup-url">pricelab.vimacorp.com.br/dashboard</div>
+          </div>
+          <div class="mockup-body">
+            <div class="mock-header">
+              <div class="mock-title">Dashboard PriceLab</div>
+              <div class="mock-badge">&#9679; Ao vivo</div>
+            </div>
+            <div class="mock-stats-row">
+              <div class="mock-stat"><div class="mock-stat-label">Margem média</div><div class="mock-stat-value green">32.4%</div></div>
+              <div class="mock-stat"><div class="mock-stat-label">Produtos</div><div class="mock-stat-value cyan">847</div></div>
+              <div class="mock-stat"><div class="mock-stat-label">ROI médio</div><div class="mock-stat-value white">2.8x</div></div>
+            </div>
+            <div class="mock-table">
+              <div class="mock-table-header"><span>Produto</span><span>Canal</span><span>Custo</span><span>Preço</span></div>
+              <div class="mock-table-row"><span>Kit Capinha iPhone 15</span><span class="mock-tag ml">ML</span><span>R$ 18,40</span><span style="color:var(--cyan)">R$ 54,90</span></div>
+              <div class="mock-table-row"><span>Fone Bluetooth TWS</span><span class="mock-tag az">AMZ</span><span>R$ 32,10</span><span style="color:var(--cyan)">R$ 89,90</span></div>
+              <div class="mock-table-row"><span>Película 9D Galaxy</span><span class="mock-tag sp">SHP</span><span>R$ 4,20</span><span style="color:var(--cyan)">R$ 19,90</span></div>
+              <div class="mock-table-row"><span>Carregador Turbo 65W</span><span class="mock-tag ml">ML</span><span>R$ 41,50</span><span style="color:var(--cyan)">R$ 119,90</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUSTED BY STRIP -->
+<div class="trust-strip reveal">
+  <div class="trust-inner">
+    <div class="trust-label">Integrado com os maiores marketplaces do Brasil</div>
+    <div class="trust-logos">
+      <div class="trust-logo-item"><img src="logos/ml.svg" alt="Mercado Livre"><span>Mercado Livre</span></div>
+      <div class="trust-logo-item"><img src="logos/amazon.svg" alt="Amazon"><span>Amazon</span></div>
+      <div class="trust-logo-item"><img src="logos/shopee.svg" alt="Shopee"><span>Shopee</span></div>
+      <div class="trust-logo-item"><img src="logos/tiktok.svg" alt="TikTok Shop"><span>TikTok Shop</span></div>
+    </div>
+    <div class="trust-coming"><span>Em breve: Magalu, SHEIN, Kwai</span></div>
+  </div>
+</div>
+
+<!-- STATS BAR -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="stat-item reveal"><div class="stat-number" data-target="25" data-prefix="~" data-suffix="%">~0%</div><div class="stat-label">da margem é perdida por quem precifica sem considerar todos os tributos</div></div>
+    <div class="stat-item reveal reveal-delay-1"><div class="stat-number" data-target="1200" data-suffix="+">0+</div><div class="stat-label">combinações de regras fiscais entre estados, NCMs e regimes tributários</div></div>
+    <div class="stat-item reveal reveal-delay-2"><div class="stat-number" data-custom="4h &#8594; 30s">0</div><div class="stat-label">o tempo que você economiza por nota fiscal processada</div></div>
+  </div>
+</div>
+
+<!-- PAIN SECTION -->
+<section class="sec" style="background:var(--dark2)"><div class="sec-glow"></div><div class="si">
+  <div class="reveal"><div class="sl">O problema real</div>
+  <div class="st">Tributação brasileira não perdoa quem precifica <span class="ac">no escuro.</span></div>
+  <div class="sd">ICMS-ST, MVA Ajustado, IPI, substituição tributária... as regras mudam por estado, por tipo de produto e por regime tributário. Precificar sem considerar tudo isso é vender no prejuízo.</div></div>
+  <div class="pg">
+    <div class="pc reveal"><div class="num">01</div><h3>Complexidade fiscal invisível</h3><p>São 27 alíquotas internas de ICMS, centenas de MVAs por NCM e faixas progressivas do Simples Nacional. Cada combinação muda o custo real do seu produto — e a maioria dos empreendedores não calcula isso.</p></div>
+    <div class="pc reveal reveal-delay-1"><div class="num">02</div><h3>Comissões que corroem margem</h3><p>Mercado Livre cobra diferente da Amazon, que cobra diferente da Shopee. E dentro de cada marketplace, a comissão varia por categoria. Sem automação, é impossível manter a rentabilidade.</p></div>
+    <div class="pc reveal reveal-delay-2"><div class="num">03</div><h3>Escala sem visibilidade</h3><p>Conforme seu catálogo cresce e você opera em mais canais, fica impossível manter preços competitivos e lucrativos ao mesmo tempo sem uma ferramenta especializada.</p></div>
+  </div>
+</div></section>
+
+<!-- PRODUCTS -->
+<section class="sec" id="produtos"><div class="si">
+  <div class="reveal"><div class="sl">Nossa ferramenta</div>
+  <div class="st">Precificação inteligente para <span class="ac">e-commerce brasileiro.</span></div>
+  <div class="sd">Criada para empreendedores que operam em múltiplos marketplaces e precisam de precisão fiscal real, não estimativa.</div></div>
+  <div style="max-width:640px">
+    <div class="prd pl reveal" style="border-radius:24px">
+      <div class="prd-mini-mockup">
+        <div class="mini-mock-row"><div class="mini-mock-bar" style="flex:2"></div><div class="mini-mock-bar" style="flex:1;opacity:.5"></div></div>
+        <div class="mini-mock-row"><div class="mini-mock-cell"></div><div class="mini-mock-cell"></div><div class="mini-mock-cell"></div></div>
+        <div class="mini-mock-row"><div class="mini-mock-cell"></div><div class="mini-mock-cell"></div><div class="mini-mock-cell"></div></div>
+      </div>
+      <div class="prd-icon">PL</div><div class="sub">Precificação Estratégica</div><h3>PriceLab</h3>
+      <p>Importa sua nota fiscal, calcula o custo real com todos os impostos e gera preços otimizados para cada marketplace automaticamente.</p>
+      <ul class="pf">
+        <li><span class="ck">&#10003;</span>Cálculo automático de ICMS-ST, IPI e DAS</li>
+        <li><span class="ck">&#10003;</span>Comissão real por categoria em cada marketplace</li>
+        <li><span class="ck">&#10003;</span>ROI e margem em tempo real por produto</li>
+        <li><span class="ck">&#10003;</span>Importação de XML e PDF de NF-e</li>
+        <li><span class="ck">&#10003;</span>Criação de kits com precificação conjunta</li>
+        <li><span class="ck">&#10003;</span>Ficha de anúncio para cada marketplace</li>
+      </ul>
+      <a href="https://pricelab.vimacorp.com.br" class="bp" style="width:100%;justify-content:center">Testar PriceLab grátis <span style="font-size:16px">&#8594;</span></a>
+    </div>
+    <div class="reveal" style="margin-top:32px;padding:24px 32px;background:rgba(249,115,22,.04);border:1px solid rgba(249,115,22,.1);border-radius:16px;display:flex;align-items:center;gap:16px">
+      <div style="width:40px;height:40px;border-radius:10px;background:linear-gradient(135deg,#f97316,#ef4444);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#fff;flex-shrink:0">CQ</div>
+      <div><div style="font-size:14px;font-weight:700;margin-bottom:2px">CatalogiQ <span style="font-size:11px;color:var(--g500);font-weight:500">— em breve</span></div><div style="font-size:12px;color:var(--g500);line-height:1.5">Análise inteligente de catálogos de fornecedores com IA. Identifique os produtos com maior potencial de retorno.</div></div>
+    </div>
+  </div>
+</div></section>
+
+<!-- METHOD -->
+<section class="sec" id="metodo" style="background:var(--dark2)"><div class="sec-glow"></div><div class="si">
+  <div class="reveal"><div class="sl">Método</div>
+  <div class="st">Da nota fiscal ao <span class="ac">preço ideal.</span></div>
+  <div class="sd">Sem planilha, sem fórmula manual, sem achismo. Três passos e pronto.</div></div>
+  <div style="max-width:560px">
+  <div class="reveal">
+    <div class="sti"><div class="stn">1</div><div><h5>Importe a NF-e</h5><p>Arraste o XML ou PDF da nota fiscal. O sistema extrai produtos, NCMs e valores automaticamente.</p></div></div>
+    <div class="sti"><div class="stn">2</div><div><h5>Custo fiscal calculado</h5><p>ICMS-ST, IPI, MVA Ajustado, DAS — tudo calculado em segundos com base nos dados da sua empresa.</p></div></div>
+    <div class="sti"><div class="stn">3</div><div><h5>Preço por marketplace</h5><p>Defina seu ROI alvo. O PriceLab gera o preço ideal para cada canal, com comissão real por categoria.</p></div></div>
+  </div>
+  </div>
+</div></section>
+
+<!-- PRICING -->
+<section class="sec" id="planos"><div class="si">
+  <div class="reveal"><div class="sl">Planos</div>
+  <div class="st">Comece grátis. Escale quando <span class="ac">fizer sentido.</span></div>
+  <div class="sd">7 dias grátis. Sem cartão de crédito. Cancele quando quiser.</div></div>
+  <div class="prg reveal">
+    <div class="prc">
+      <div class="prn">PriceLab</div><div class="prv">R$ 69<span>,90/mês</span></div>
+      <div class="prd-desc">Precificação estratégica para operações em múltiplos marketplaces.</div>
+      <ul class="prfl"><li>Todos os marketplaces</li><li>Cálculo fiscal completo (ICMS-ST, IPI, DAS)</li><li>Importação de XML e PDF</li><li>Criação de kits</li><li>Fichas de anúncio</li><li>Integrações via API</li></ul>
+      <a href="https://pricelab.vimacorp.com.br" class="bs" style="width:100%;justify-content:center">Começar teste grátis</a>
+    </div>
+    <div class="prc ft">
+      <div class="prn">Pacote Completo</div>
+      <div class="promo"><div class="b">Primeiro mês por R$ 39,90</div><div class="s">Depois R$ 99,90/mês — as duas ferramentas juntas</div></div>
+      <div class="pro">De R$ 139,80/mes</div><div class="prv">R$ 99<span>,90/mês</span></div>
+      <div class="prd-desc">PriceLab + CatalogiQ (quando lançado). Precificação e inteligência de catálogo no mesmo ecossistema.</div>
+      <ul class="prfl"><li>Tudo do PriceLab</li><li>CatalogiQ incluído no lançamento</li><li>Suporte prioritário</li><li>Acesso antecipado a novidades</li><li>Atualizações contínuas</li><li>Garantia de preço — nunca pagará mais</li></ul>
+      <a href="https://pricelab.vimacorp.com.br" class="bp" style="width:100%;justify-content:center">Começar por R$ 39,90 <span style="font-size:16px">&#8594;</span></a>
+    </div>
+  </div>
+</div></section>
+
+<!-- FAQ -->
+<section class="sec" id="faq" style="background:var(--dark2)"><div class="sec-glow"></div><div class="si">
+  <div class="reveal" style="text-align:center"><div class="sl" style="justify-content:center">Perguntas frequentes</div>
+  <div class="st" style="margin:0 auto 56px;max-width:500px;text-align:center">Tudo o que você precisa saber antes de começar.</div></div>
+  <div class="faq-list reveal">
+    <div class="fi" onclick="this.classList.toggle('open')"><div class="fq">O que exatamente o PriceLab faz?<span class="ar">+</span></div><div class="fa">O PriceLab é uma ferramenta de precificação estratégica para e-commerce. Você importa a nota fiscal do seu fornecedor (XML ou PDF), e o sistema calcula automaticamente todos os custos fiscais — ICMS-ST com MVA Ajustado, IPI, DAS do Simples Nacional — considerando o estado de origem, o estado de destino e o NCM de cada produto. A partir do custo real, ele gera o preço de venda ideal para cada marketplace, aplicando a comissão correta por categoria e o frete estimado.</div></div>
+    <div class="fi" onclick="this.classList.toggle('open')"><div class="fq">Quais marketplaces são suportados?<span class="ar">+</span></div><div class="fa">Atualmente o PriceLab suporta Mercado Livre (Classico e Premium), Amazon (FBA, FBM e DBA), Shopee e TikTok Shop. Cada marketplace tem comissões diferentes por categoria de produto — o PriceLab detecta automaticamente a categoria com base no NCM e aplica a comissão correta, incluindo taxas fixas por venda. Novos marketplaces como Magalu, SHEIN e Kwai estão no roadmap.</div></div>
+    <div class="fi" onclick="this.classList.toggle('open')"><div class="fq">Preciso entender de tributação para usar?<span class="ar">+</span></div><div class="fa">Não. Essa é justamente a proposta do PriceLab: eliminar a complexidade tributária. Você só precisa informar o CNPJ, a UF e o faturamento dos últimos 12 meses da sua empresa. O sistema calcula a alíquota interestadual, aplica o MVA Ajustado do NCM, determina a faixa do Simples Nacional e gera o custo fiscal real. Você foca na estratégia; a ferramenta cuida dos impostos.</div></div>
+    <div class="fi" onclick="this.classList.toggle('open')"><div class="fq">O que é o CatalogiQ e quando será lançado?<span class="ar">+</span></div><div class="fa">O CatalogiQ é uma ferramenta de análise de catálogos de fornecedores com inteligência artificial. Você importa o catálogo, e a IA gera uma Curva ABC de rentabilidade — identificando quais produtos têm maior potencial de retorno. Ele se integra ao PriceLab para que, depois de identificar o produto ideal, você já saiba exatamente quanto cobrar. O lançamento está previsto para as próximas semanas.</div></div>
+    <div class="fi" onclick="this.classList.toggle('open')"><div class="fq">Como funciona o período de teste?<span class="ar">+</span></div><div class="fa">Ao criar sua conta, você tem 7 dias de acesso completo a todas as funcionalidades — sem restrição, sem limitação de produtos e sem precisar cadastrar cartão de crédito. Se a ferramenta fizer sentido, você escolhe um plano e continua. Caso contrário, sua conta é pausada automaticamente, sem cobrança.</div></div>
+    <div class="fi" onclick="this.classList.toggle('open')"><div class="fq">Meus dados ficam seguros?<span class="ar">+</span></div><div class="fa">Sim. Os dados da sua operação são armazenados localmente no seu navegador. As conexões com os marketplaces usam OAuth 2.0, o padrão de segurança da indústria. Nós nunca recebemos ou armazenamos sua senha de nenhum marketplace.</div></div>
+    <div class="fi" onclick="this.classList.toggle('open')"><div class="fq">Posso cancelar a qualquer momento?<span class="ar">+</span></div><div class="fa">Sim, sem fidelidade e sem multa. A assinatura é mensal e você pode cancelar a qualquer momento. Se cancelar, mantém o acesso até o final do período já pago.</div></div>
+  </div>
+</div></section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="si reveal" style="position:relative;z-index:1">
+    <div class="sl" style="justify-content:center;text-align:center">Pronto para começar?</div>
+    <h2>A margem que você procura<br>começa com o <span class="ac">cálculo certo.</span></h2>
+    <p>7 dias grátis. Sem cartão. Sem compromisso.</p>
+    <a href="https://pricelab.vimacorp.com.br" class="bp" style="font-size:16px;padding:20px 44px">Criar minha conta gratuitamente <span style="font-size:20px">&#8594;</span></a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="ft"><div class="fti">
+  <div class="ftl"><div class="ftlogo"><span class="fv">VIMA</span><span class="fc">CORP</span></div><div>Tech & AI for Retail Ecosystems</div><div style="margin-top:4px;font-size:11px;color:var(--g700)">CNPJ: 58.988.172/0001-59 &middot; São Paulo, SP</div></div>
+  <div class="ftlinks"><a href="https://pricelab.vimacorp.com.br">PriceLab</a><a href="mailto:gestao@vitorinnicompany.com">Contato</a><a href="#faq">FAQ</a></div>
+</div><div style="text-align:center;padding-top:24px;font-size:11px;color:var(--g700)">&copy; 2026 VIMA CORP. Todos os direitos reservados.</div></footer>
+
+<!-- STICKY MOBILE CTA -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="https://pricelab.vimacorp.com.br">Começar gratuitamente <span>&#8594;</span></a>
+</div>
+
+<script>
+// Nav scroll
+window.addEventListener('scroll',()=>{document.getElementById('nav').classList.toggle('scrolled',window.scrollY>50)});
+
+// Scroll reveal
+const obs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('visible');obs.unobserve(e.target)}})},{threshold:.12,rootMargin:'0px 0px -60px 0px'});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+
+// Animated number counters
+const counterObs=new IntersectionObserver((entries)=>{entries.forEach(e=>{if(e.isIntersecting){animateCounter(e.target);counterObs.unobserve(e.target)}})},{threshold:.5});
+document.querySelectorAll('.stat-number').forEach(el=>counterObs.observe(el));
+
+function animateCounter(el){
+  const custom=el.dataset.custom;
+  if(custom){el.textContent=custom;return}
+  const target=parseInt(el.dataset.target);
+  const prefix=el.dataset.prefix||'';
+  const suffix=el.dataset.suffix||'';
+  const duration=1800;
+  const start=performance.now();
+  const step=(now)=>{
+    const elapsed=now-start;
+    const progress=Math.min(elapsed/duration,1);
+    const eased=1-Math.pow(1-progress,4);
+    const current=Math.round(eased*target);
+    el.textContent=prefix+current.toLocaleString('pt-BR')+suffix;
+    if(progress<1)requestAnimationFrame(step);
+  };
+  requestAnimationFrame(step);
+}
+
+// Sticky mobile CTA
+const stickyCta=document.getElementById('stickyCta');
+const heroSection=document.querySelector('.hero');
+if(window.innerWidth<=768){
+  window.addEventListener('scroll',()=>{
+    const heroBottom=heroSection.getBoundingClientRect().bottom;
+    stickyCta.classList.toggle('show',heroBottom<0);
+  });
+}
+
+// Circuit canvas — improved with more nodes and glow
+const cv=document.getElementById('cv'),cx=cv.getContext('2d');
+let W,H;
+const P=[],N=90,D=160;
+const C=['rgba(43,142,175,.6)','rgba(91,196,212,.4)','rgba(12,35,64,.7)','rgba(43,142,175,.35)','rgba(91,196,212,.25)'];
+const rs=()=>{W=cv.width=window.innerWidth;H=cv.height=window.innerHeight};
+rs();window.addEventListener('resize',rs);
+for(let i=0;i<N;i++)P.push({x:Math.random()*2e3,y:Math.random()*2e3,vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,r:Math.random()*1.8+.5,c:C[~~(Math.random()*C.length)],p:Math.random()*6.28,n:Math.random()>.55});
+const dr=()=>{
+  cx.clearRect(0,0,W,H);
+  for(let i=0;i<P.length;i++){
+    for(let j=i+1;j<P.length;j++){
+      const dx=P[i].x-P[j].x,dy=P[i].y-P[j].y,d=Math.sqrt(dx*dx+dy*dy);
+      if(d<D){
+        const alpha=(1-d/D)*.12;
+        cx.strokeStyle=`rgba(43,142,175,${alpha})`;
+        cx.lineWidth=.4;
+        cx.beginPath();
+        if(P[i].n&&P[j].n&&d<D*.6){
+          cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[i].x,P[j].y);cx.lineTo(P[j].x,P[j].y);
+        }else{
+          cx.moveTo(P[i].x,P[i].y);cx.lineTo(P[j].x,P[j].y);
+        }
+        cx.stroke();
+      }
+    }
+  }
+  for(const p of P){
+    p.p+=.012;
+    const r=p.r*(1+Math.sin(p.p)*.15);
+    cx.fillStyle=p.c;
+    cx.globalAlpha=.5;
+    cx.beginPath();
+    if(p.n){
+      const s=r;cx.fillRect(p.x-s,p.y-s,s*2,s*2);
+    }else{
+      cx.arc(p.x,p.y,r,0,6.28);cx.fill();
+    }
+    // Subtle glow on some nodes
+    if(r>1.2){
+      cx.globalAlpha=.08;
+      cx.beginPath();cx.arc(p.x,p.y,r*4,0,6.28);cx.fill();
+    }
+    cx.globalAlpha=1;
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<-10)p.x=W+10;if(p.x>W+10)p.x=-10;
+    if(p.y<-10)p.y=H+10;if(p.y>H+10)p.y=-10;
+  }
+  requestAnimationFrame(dr);
+};
+dr();
+
+// Smooth scroll
+document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click',e=>{e.preventDefault();const t=document.querySelector(a.getAttribute('href'));if(t)t.scrollIntoView({behavior:'smooth',block:'start'})})});
+</script>
+</body>
+</html>
