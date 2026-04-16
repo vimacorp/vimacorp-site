@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VIMA CORP | Tech & AI for Retail Ecosystems</title>
-<meta name="description" content="Ferramentas de inteligência artificial para e-commerce brasileiro. PriceLab — precificação estratégica. CatalogiQ — análise inteligente de catálogos.">
+<meta name="description" content="Ferramentas de inteligência artificial para marketplaces brasileiros. PriceLab — precificação estratégica. CatalogiQ — análise inteligente de catálogos.">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0a'/><text x='50' y='42' font-family='system-ui' font-size='24' font-weight='900' fill='white' text-anchor='middle'>VIMA</text><text x='50' y='72' font-family='system-ui' font-size='24' font-weight='400' fill='%232B8EAF' text-anchor='middle'>CORP</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
@@ -31,7 +31,7 @@ img{max-width:100%;display:block}
 .grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 0%,var(--dark) 75%)}
 
 /* ===== PARTICLE CANVAS ===== */
-#circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
+#circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.45}
 
 /* ===== SCROLL REVEAL ===== */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
@@ -93,38 +93,36 @@ section{position:relative;z-index:2}
 .hero-ctas{display:flex;gap:14px;flex-wrap:wrap}
 
 /* ===== ECOSYSTEM ===== */
-.eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:48px}
-.eco-card{background:var(--card);border:1px solid var(--card-border);border-radius:20px;padding:40px;transition:all .35s;position:relative;overflow:hidden}
-.eco-card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.eco-card.blue::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--blue2),var(--cyan))}
-.eco-card.orange::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--orange),var(--orange2))}
-.eco-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:20px}
-.eco-card-name{font-size:26px;font-weight:800;letter-spacing:-1px}
-.eco-badge{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:5px 14px;border-radius:100px}
+.eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:56px}
+.eco-card{background:rgba(14,14,26,.9);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:52px 48px;transition:all .35s;position:relative;overflow:hidden}
+.eco-card:hover{border-color:rgba(255,255,255,.2);transform:translateY(-6px);box-shadow:0 28px 80px rgba(0,0,0,.4)}
+.eco-card.blue::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue2),var(--cyan))}
+.eco-card.blue::after{content:'';position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(180deg,rgba(43,142,175,.06),transparent);pointer-events:none}
+.eco-card.orange::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--orange),var(--orange2))}
+.eco-card.orange::after{content:'';position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(180deg,rgba(249,115,22,.04),transparent);pointer-events:none}
+.eco-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;position:relative;z-index:1}
+.eco-card-name{font-size:32px;font-weight:800;letter-spacing:-1.5px}
+.eco-badge{font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;padding:6px 16px;border-radius:100px}
 .eco-badge.live{background:rgba(34,197,94,.12);color:#22c55e;border:1px solid rgba(34,197,94,.2)}
 .eco-badge.soon{background:rgba(249,115,22,.1);color:var(--orange);border:1px solid rgba(249,115,22,.2)}
-.eco-card p{font-size:15px;color:var(--g400);line-height:1.7;margin-bottom:24px}
-.eco-features{list-style:none;display:flex;flex-direction:column;gap:10px}
-.eco-features li{font-size:13px;color:var(--g300);display:flex;align-items:center;gap:10px}
-.eco-features li::before{content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.eco-card p{font-size:16px;color:var(--g400);line-height:1.75;margin-bottom:28px;position:relative;z-index:1}
+.eco-features{list-style:none;display:flex;flex-direction:column;gap:14px;position:relative;z-index:1}
+.eco-features li{font-size:15px;color:var(--g300);display:flex;align-items:center;gap:12px}
+.eco-features li::before{content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0}
 .eco-card.blue .eco-features li::before{background:var(--cyan)}
 .eco-card.orange .eco-features li::before{background:var(--orange)}
+.eco-card-cta{margin-top:32px;position:relative;z-index:1}
 
 /* ===== TRUST STRIP ===== */
 .trust{padding:80px 0;border-top:1px solid rgba(255,255,255,.04);border-bottom:1px solid rgba(255,255,255,.04)}
-.trust-label{text-align:center;font-size:13px;color:var(--g500);font-weight:500;margin-bottom:36px;letter-spacing:.5px}
-.trust-logos{display:flex;justify-content:center;gap:24px;flex-wrap:wrap}
-.trust-logo-card{width:140px;height:80px;display:flex;align-items:center;justify-content:center;border-radius:14px;background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.07);transition:all .3s;padding:16px}
-.trust-logo-card:hover{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.14);transform:translateY(-2px)}
-.trust-logo-card img{max-height:36px;max-width:80px;opacity:.85;transition:opacity .3s;filter:brightness(0) invert(1);object-fit:contain}
-.trust-logo-card:hover img{opacity:1}
+.trust-label{text-align:center;font-size:13px;color:var(--g500);font-weight:500;margin-bottom:40px;letter-spacing:.5px}
+.trust-logos{display:flex;justify-content:center;gap:28px;flex-wrap:wrap}
+.trust-logo-card{width:180px;height:100px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:rgba(255,255,255,.92);border:1px solid rgba(255,255,255,.15);transition:all .3s;padding:20px}
+.trust-logo-card:hover{background:#fff;transform:translateY(-3px);box-shadow:0 12px 40px rgba(0,0,0,.2)}
+.trust-logo-card img{max-height:44px;max-width:120px;opacity:1;transition:all .3s;object-fit:contain}
+.trust-logo-card:hover img{transform:scale(1.05)}
 
-/* ===== STATS ===== */
-.stats{padding:100px 0}
-.stats-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:40px}
-.stat-item{text-align:center}
-.stat-number{font-size:52px;font-weight:900;letter-spacing:-3px;background:linear-gradient(135deg,#fff 20%,var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;margin-bottom:10px;line-height:1.1}
-.stat-desc{font-size:15px;color:var(--g400);line-height:1.6;max-width:260px;margin:0 auto}
+/* stats removed */
 
 /* ===== PAIN SECTION ===== */
 .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
@@ -167,18 +165,18 @@ section{position:relative;z-index:2}
 .price-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
 .price-card.featured{border:1px solid rgba(43,142,175,.3);box-shadow:0 0 60px rgba(43,142,175,.08),0 0 0 1px rgba(43,142,175,.15)}
 .price-card.featured::before{content:'';position:absolute;inset:-1px;border-radius:20px;padding:1px;background:linear-gradient(135deg,var(--blue2),var(--cyan),var(--blue2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
-.price-card-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px}
+.price-card-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;text-align:center}
 .price-card-label.cyan{color:var(--cyan)}
 .price-card-label.orange{color:var(--orange)}
 .price-featured-badge{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,var(--blue2),var(--cyan));padding:5px 18px;border-radius:100px;font-size:10px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#fff;white-space:nowrap}
-.price-name{font-size:24px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:8px}
-.price-desc{font-size:13px;color:var(--g500);line-height:1.6;margin-bottom:24px;min-height:42px}
-.price-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:6px}
+.price-name{font-size:24px;font-weight:800;color:#fff;letter-spacing:-1px;margin-bottom:8px;text-align:center}
+.price-desc{font-size:13px;color:var(--g500);line-height:1.6;margin-bottom:24px;min-height:42px;text-align:center}
+.price-amount{display:flex;align-items:baseline;gap:4px;margin-bottom:6px;justify-content:center}
 .price-amount .currency{font-size:16px;font-weight:600;color:var(--g400)}
 .price-amount .value{font-size:44px;font-weight:900;letter-spacing:-2px;color:#fff;line-height:1}
 .price-amount .period{font-size:14px;color:var(--g500);margin-left:4px}
-.price-old{font-size:13px;color:var(--g600);text-decoration:line-through;margin-bottom:4px;min-height:20px}
-.price-promo{font-size:12px;color:var(--cyan);font-weight:600;margin-bottom:24px;min-height:18px}
+.price-old{font-size:13px;color:var(--g600);text-decoration:line-through;margin-bottom:4px;min-height:20px;text-align:center}
+.price-promo{font-size:12px;color:var(--cyan);font-weight:600;margin-bottom:24px;min-height:18px;text-align:center}
 .price-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;flex:1}
 .price-features li{font-size:13px;color:var(--g300);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
 .price-features li::before{content:'';width:16px;height:16px;border-radius:50%;flex-shrink:0;margin-top:2px;background:rgba(43,142,175,.15)}
@@ -233,8 +231,6 @@ section{position:relative;z-index:2}
   .hero-sub{font-size:16px}
   .eco-grid{grid-template-columns:1fr}
   .pain-grid{grid-template-columns:1fr}
-  .stats-grid{grid-template-columns:1fr;gap:40px}
-  .stat-number{font-size:44px}
   .feature-grid{grid-template-columns:1fr}
   .pricing-grid{grid-template-columns:1fr;max-width:400px;margin-left:auto;margin-right:auto}
   .section-title{font-size:32px;letter-spacing:-1.5px}
@@ -244,7 +240,7 @@ section{position:relative;z-index:2}
   .final-cta h2{font-size:34px}
   .hero-ctas{flex-direction:column;align-items:flex-start}
   .trust-logos{gap:16px}
-  .trust-logo-card{width:110px;height:64px}
+  .trust-logo-card{width:140px;height:80px;padding:16px}
 }
 </style>
 </head>
@@ -282,7 +278,7 @@ section{position:relative;z-index:2}
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge reveal"><span class="dot"></span> Tech & AI for Retail Ecosystems</div>
-      <h1 class="reveal reveal-d1">Ferramentas inteligentes para<br><span class="accent">e-commerce brasileiro</span></h1>
+      <h1 class="reveal reveal-d1">Ferramentas inteligentes para<br><span class="accent">marketplaces brasileiros.</span></h1>
       <p class="hero-sub reveal reveal-d2">Tributos complexos, comissões variáveis, margens apertadas. Construímos as ferramentas que faltavam para vendedores tomarem decisões com dados reais.</p>
       <div class="hero-ctas reveal reveal-d3">
         <a href="https://pricelab.vimacorp.com.br" class="btn-primary">Começar gratuitamente <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -297,8 +293,8 @@ section{position:relative;z-index:2}
   <div class="container">
     <div class="reveal">
       <div class="section-label">Ecossistema VIMA CORP</div>
-      <h2 class="section-title">Duas ferramentas, um objetivo:<br>lucro real no e-commerce</h2>
-      <p class="section-sub">Cada ferramenta resolve um desafio crítico do varejo online brasileiro. Juntas, cobrem da seleção de produtos à precificação final.</p>
+      <h2 class="section-title">Duas ferramentas, um objetivo:<br>lucro real nos marketplaces.</h2>
+      <p class="section-sub">Cada ferramenta resolve um desafio crítico dos marketplaces brasileiros. Juntas, cobrem da seleção de produtos à precificação final.</p>
     </div>
     <div class="eco-grid">
       <div class="eco-card blue reveal reveal-d1">
@@ -314,6 +310,7 @@ section{position:relative;z-index:2}
           <li>Fichas de anúncio por marketplace</li>
           <li>Mercado Livre, Amazon, Shopee, TikTok Shop</li>
         </ul>
+        <div class="eco-card-cta"><a href="https://pricelab.vimacorp.com.br" class="btn-primary">Testar PriceLab grátis <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
       </div>
       <div class="eco-card orange reveal reveal-d2">
         <div class="eco-card-header">
@@ -328,6 +325,7 @@ section{position:relative;z-index:2}
           <li>Classificação: COMPRAR / COTAR / AVALIAR / IGNORAR</li>
           <li>Análise multi-canal por marketplace</li>
         </ul>
+        <div class="eco-card-cta"><a href="#catalogiq" class="btn-primary btn-orange">Saiba mais sobre CatalogiQ <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
       </div>
     </div>
   </div>
@@ -338,30 +336,10 @@ section{position:relative;z-index:2}
   <div class="container">
     <div class="trust-label reveal">Integrado com os maiores marketplaces do Brasil</div>
     <div class="trust-logos reveal reveal-d1">
-      <div class="trust-logo-card"><img src="/logos/ml.svg" alt="Mercado Livre" loading="lazy"></div>
-      <div class="trust-logo-card"><img src="/logos/amazon.svg" alt="Amazon" loading="lazy"></div>
-      <div class="trust-logo-card"><img src="/logos/shopee.svg" alt="Shopee" loading="lazy"></div>
-      <div class="trust-logo-card"><img src="/logos/tiktok.svg" alt="TikTok Shop" loading="lazy"></div>
-    </div>
-  </div>
-</section>
-
-<!-- STATS -->
-<section class="stats">
-  <div class="container">
-    <div class="stats-grid">
-      <div class="stat-item reveal">
-        <div class="stat-number" data-count="25" data-suffix="%">0%</div>
-        <div class="stat-desc">margem perdida por quem precifica sem considerar tributos</div>
-      </div>
-      <div class="stat-item reveal reveal-d1">
-        <div class="stat-number" data-count="1200" data-suffix="+" data-separator=".">0</div>
-        <div class="stat-desc">combinações de regras fiscais entre estados e NCMs</div>
-      </div>
-      <div class="stat-item reveal reveal-d2">
-        <div class="stat-number" data-static="4h &rarr; 30s">4h &rarr; 30s</div>
-        <div class="stat-desc">tempo economizado por nota fiscal processada</div>
-      </div>
+      <div class="trust-logo-card"><img src="logos/ml.svg" alt="Mercado Livre" loading="lazy"></div>
+      <div class="trust-logo-card"><img src="logos/amazon.svg" alt="Amazon" loading="lazy"></div>
+      <div class="trust-logo-card"><img src="logos/shopee.svg" alt="Shopee" loading="lazy"></div>
+      <div class="trust-logo-card"><img src="logos/tiktok.svg" alt="TikTok Shop" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -397,7 +375,7 @@ section{position:relative;z-index:2}
 <section id="pricelab" class="product-section">
   <div class="container">
     <div class="product-header reveal">
-      <div class="section-label">PriceLab</div>
+      <div style="display:flex;align-items:center;gap:14px;margin-bottom:16px"><img src="logos/pricelab-icon.svg" alt="PriceLab" style="width:44px;height:44px;border-radius:12px"><img src="logos/pricelab-wordmark.svg" alt="PriceLab" style="height:28px"></div>
       <h2 class="section-title">Precificação com inteligência fiscal</h2>
       <p class="section-sub">Importe sua nota fiscal e tenha preços otimizados para 4 marketplaces em segundos. Com todos os tributos, comissões e margem calculados automaticamente.</p>
     </div>
@@ -434,8 +412,7 @@ section{position:relative;z-index:2}
       </div>
     </div>
     <div class="pricelab-cta reveal">
-      <a href="https://pricelab.vimacorp.com.br" class="btn-primary">Testar PriceLab grátis por 7 dias</a>
-      <span class="note">Sem cartão de crédito</span>
+      <a href="https://pricelab.vimacorp.com.br" class="btn-primary">Testar PriceLab grátis por 7 dias <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
 </section>
@@ -480,6 +457,9 @@ section{position:relative;z-index:2}
         <h4>Importação de catálogos</h4>
         <p>Importe catálogos em PDF ou Excel diretamente do fornecedor. O sistema extrai e organiza os dados automaticamente para análise.</p>
       </div>
+    </div>
+    <div class="pricelab-cta reveal" style="margin-top:36px">
+      <a href="mailto:gestao@vitorinnicompany.com?subject=Lista de espera CatalogiQ" class="btn-primary btn-orange">Entrar na lista de espera <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
 </section>
@@ -608,7 +588,7 @@ section{position:relative;z-index:2}
     <div class="faq-list">
       <div class="faq-item reveal">
         <button class="faq-q"><span>O que é o PriceLab?</span><span class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
-        <div class="faq-a"><div class="faq-a-inner">O PriceLab é uma ferramenta de precificação estratégica para vendedores de e-commerce brasileiro. Ele importa notas fiscais (NF-e em XML ou PDF), calcula automaticamente todos os tributos (ICMS-ST, IPI, MVA, DAS Simples Nacional) e gera preços otimizados para Mercado Livre, Amazon, Shopee e TikTok Shop, com margem real e ROI visíveis em tempo real.</div></div>
+        <div class="faq-a"><div class="faq-a-inner">O PriceLab é uma ferramenta de precificação estratégica para vendedores de marketplaces brasileiros. Ele importa notas fiscais (NF-e em XML ou PDF), calcula automaticamente todos os tributos (ICMS-ST, IPI, MVA, DAS Simples Nacional) e gera preços otimizados para Mercado Livre, Amazon, Shopee e TikTok Shop, com margem real e ROI visíveis em tempo real.</div></div>
       </div>
       <div class="faq-item reveal">
         <button class="faq-q"><span>O que é o CatalogiQ?</span><span class="arrow"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M4 6l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span></button>
@@ -656,7 +636,7 @@ section{position:relative;z-index:2}
   <div class="container footer-inner">
     <div class="footer-brand">
       <div class="footer-logo">VIMA<span class="c">CORP</span></div>
-      <div class="footer-cnpj">CNPJ: 57.855.498/0001-17</div>
+      <div class="footer-cnpj">CNPJ: 58.988.172/0001-59 &middot; São Paulo, SP</div>
     </div>
     <div class="footer-links">
       <a href="#ecossistema">Ecossistema</a>
@@ -670,44 +650,88 @@ section{position:relative;z-index:2}
 </footer>
 
 <script>
-/* ===== PARTICLE CANVAS ===== */
+/* ===== CIRCUIT BOARD CANVAS ===== */
 (function(){
   const c=document.getElementById('circuit-canvas');
   const ctx=c.getContext('2d');
-  let w,h,particles=[];
+  let w,h;
   function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
   window.addEventListener('resize',resize);resize();
-  class P{
-    constructor(){this.reset()}
-    reset(){
-      this.x=Math.random()*w;this.y=Math.random()*h;
-      this.vx=(Math.random()-.5)*.3;this.vy=(Math.random()-.5)*.3;
-      this.r=Math.random()*1.5+.5;this.a=Math.random()*.3+.1;
-    }
-    update(){
-      this.x+=this.vx;this.y+=this.vy;
-      if(this.x<0||this.x>w||this.y<0||this.y>h)this.reset();
-    }
-    draw(){
-      ctx.beginPath();ctx.arc(this.x,this.y,this.r,0,Math.PI*2);
-      ctx.fillStyle=`rgba(91,196,212,${this.a})`;ctx.fill();
-    }
+
+  // Particles
+  const N=Math.min(100,Math.floor(w*h/12000));
+  const particles=[];
+  const COLORS=['rgba(43,142,175,.5)','rgba(91,196,212,.35)','rgba(139,92,246,.25)','rgba(43,142,175,.3)'];
+
+  for(let i=0;i<N;i++){
+    particles.push({
+      x:Math.random()*w,y:Math.random()*h,
+      vx:(Math.random()-.5)*.4,vy:(Math.random()-.5)*.4,
+      r:Math.random()*1.8+.6,
+      c:COLORS[~~(Math.random()*COLORS.length)],
+      phase:Math.random()*Math.PI*2,
+      isNode:Math.random()>.5
+    });
   }
-  const count=Math.min(60,Math.floor(w*h/20000));
-  for(let i=0;i<count;i++)particles.push(new P());
+
   function loop(){
     ctx.clearRect(0,0,w,h);
-    particles.forEach(p=>{p.update();p.draw()});
-    // draw lines between close particles
+
+    // Draw connections
     for(let i=0;i<particles.length;i++){
       for(let j=i+1;j<particles.length;j++){
-        const dx=particles[i].x-particles[j].x,dy=particles[i].y-particles[j].y;
+        const dx=particles[i].x-particles[j].x;
+        const dy=particles[i].y-particles[j].y;
         const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<150){
-          ctx.beginPath();ctx.moveTo(particles[i].x,particles[i].y);ctx.lineTo(particles[j].x,particles[j].y);
-          ctx.strokeStyle=`rgba(43,142,175,${.06*(1-d/150)})`;ctx.lineWidth=.5;ctx.stroke();
+        if(d<180){
+          const alpha=(1-d/180)*.12;
+          ctx.strokeStyle=`rgba(43,142,175,${alpha})`;
+          ctx.lineWidth=.5;
+          ctx.beginPath();
+          // Circuit-style L-shaped lines for some connections
+          if(particles[i].isNode&&particles[j].isNode&&d<120){
+            ctx.moveTo(particles[i].x,particles[i].y);
+            ctx.lineTo(particles[i].x,particles[j].y);
+            ctx.lineTo(particles[j].x,particles[j].y);
+          }else{
+            ctx.moveTo(particles[i].x,particles[i].y);
+            ctx.lineTo(particles[j].x,particles[j].y);
+          }
+          ctx.stroke();
         }
       }
+    }
+
+    // Draw particles
+    for(const p of particles){
+      p.phase+=.01;
+      const pulse=1+Math.sin(p.phase)*.12;
+      const r=p.r*pulse;
+
+      ctx.fillStyle=p.c;
+      ctx.globalAlpha=.6;
+      ctx.beginPath();
+      if(p.isNode){
+        // Square nodes (circuit junctions)
+        ctx.fillRect(p.x-r,p.y-r,r*2,r*2);
+      }else{
+        ctx.arc(p.x,p.y,r,0,Math.PI*2);
+        ctx.fill();
+      }
+
+      // Subtle glow on larger nodes
+      if(r>1.4){
+        ctx.globalAlpha=.06;
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,r*5,0,Math.PI*2);
+        ctx.fill();
+      }
+      ctx.globalAlpha=1;
+
+      // Move
+      p.x+=p.vx;p.y+=p.vy;
+      if(p.x<-10)p.x=w+10;if(p.x>w+10)p.x=-10;
+      if(p.y<-10)p.y=h+10;if(p.y>h+10)p.y=-10;
     }
     requestAnimationFrame(loop);
   }
@@ -740,33 +764,6 @@ section{position:relative;z-index:2}
   els.forEach(el=>obs.observe(el));
 })();
 
-/* ===== ANIMATED COUNTERS ===== */
-(function(){
-  const nums=document.querySelectorAll('.stat-number');
-  const obs=new IntersectionObserver((entries)=>{
-    entries.forEach(e=>{
-      if(!e.isIntersecting)return;
-      const el=e.target;
-      obs.unobserve(el);
-      if(el.dataset.static)return; // don't animate static text
-      const target=parseInt(el.dataset.count);
-      const suffix=el.dataset.suffix||'';
-      const sep=el.dataset.separator||'';
-      const duration=1500;
-      const start=performance.now();
-      function step(now){
-        const p=Math.min((now-start)/duration,1);
-        const eased=1-Math.pow(1-p,3); // ease out cubic
-        let val=Math.round(eased*target);
-        if(sep){val=val.toLocaleString('pt-BR')}
-        el.textContent=val+suffix;
-        if(p<1)requestAnimationFrame(step);
-      }
-      requestAnimationFrame(step);
-    });
-  },{threshold:.5});
-  nums.forEach(n=>obs.observe(n));
-})();
 
 /* ===== FAQ ACCORDION ===== */
 (function(){

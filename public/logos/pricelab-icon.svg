@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#5BC4D4"/>
+      <stop offset="50%" style="stop-color:#2B8EAF"/>
+      <stop offset="100%" style="stop-color:#8B5CF6"/>
+    </linearGradient>
+    <linearGradient id="circuit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:rgba(255,255,255,0.15)"/>
+      <stop offset="100%" style="stop-color:rgba(255,255,255,0.05)"/>
+    </linearGradient>
+  </defs>
+  <rect width="120" height="120" rx="26" fill="url(#bg)"/>
+  <!-- Circuit pattern -->
+  <g stroke="rgba(255,255,255,0.12)" stroke-width="0.8" fill="none">
+    <line x1="20" y1="30" x2="45" y2="30"/><line x1="45" y1="30" x2="45" y2="55"/>
+    <line x1="75" y1="20" x2="75" y2="45"/><line x1="75" y1="45" x2="100" y2="45"/>
+    <line x1="30" y1="70" x2="30" y2="95"/><line x1="30" y1="95" x2="55" y2="95"/>
+    <line x1="85" y1="75" x2="85" y2="100"/><line x1="65" y1="75" x2="85" y2="75"/>
+    <line x1="15" y1="55" x2="35" y2="55"/><line x1="85" y1="55" x2="105" y2="55"/>
+    <line x1="55" y1="15" x2="55" y2="35"/><line x1="55" y1="85" x2="55" y2="105"/>
+  </g>
+  <!-- Circuit nodes -->
+  <g fill="rgba(255,255,255,0.2)">
+    <circle cx="45" cy="30" r="2.5"/><circle cx="75" cy="45" r="2.5"/>
+    <circle cx="30" cy="70" r="2.5"/><circle cx="85" cy="75" r="2.5"/>
+    <circle cx="45" cy="55" r="2"/><circle cx="100" cy="45" r="2"/>
+    <circle cx="55" cy="95" r="2"/><circle cx="55" cy="35" r="2"/>
+  </g>
+  <!-- PL text -->
+  <text x="60" y="72" text-anchor="middle" font-family="Inter,system-ui,sans-serif" font-size="46" font-weight="900" fill="#000" letter-spacing="-2">PL</text>
+</svg>
