@@ -31,7 +31,7 @@ img{max-width:100%;display:block}
 .grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 0%,var(--dark) 75%)}
 
 /* ===== PARTICLE CANVAS ===== */
-#circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.9}
+#circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.8}
 
 /* ===== SCROLL REVEAL ===== */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
@@ -653,7 +653,7 @@ section{position:relative;z-index:2}
 </footer>
 
 <script>
-/* ===== AGGRESSIVE CIRCUIT CANVAS ===== */
+/* ===== NEURAL SYNAPSE CANVAS ===== */
 (function(){
   const c=document.getElementById('circuit-canvas');
   const ctx=c.getContext('2d');
@@ -661,164 +661,207 @@ section{position:relative;z-index:2}
   function resize(){w=c.width=window.innerWidth;h=c.height=window.innerHeight}
   window.addEventListener('resize',resize);resize();
 
-  // --- GRID ---
-  const GRID=80;
-
-  // --- PARTICLES (many more, faster) ---
-  const N=Math.min(220,Math.floor(w*h/6000));
-  const particles=[];
-  const COLORS=[
-    [43,142,175],[91,196,212],[139,92,246],[91,196,212],[43,142,175],[100,160,220]
-  ];
+  // --- NEURONS ---
+  const N=Math.min(160,Math.floor(w*h/8000));
+  const neurons=[];
+  const COLS=[[43,142,175],[91,196,212],[70,120,200],[139,92,246],[60,180,190]];
 
   for(let i=0;i<N;i++){
-    const col=COLORS[~~(Math.random()*COLORS.length)];
-    particles.push({
+    const col=COLS[~~(Math.random()*COLS.length)];
+    // Dendrite angles (small branches radiating from each neuron)
+    const nDend=~~(Math.random()*4)+2;
+    const dends=[];
+    for(let d=0;d<nDend;d++){
+      const a=Math.random()*Math.PI*2;
+      const len=12+Math.random()*22;
+      dends.push({a,len,branches:Math.random()>.5?1:0});
+    }
+    neurons.push({
       x:Math.random()*w,y:Math.random()*h,
-      vx:(Math.random()-.5)*1.1,vy:(Math.random()-.5)*1.1,
-      r:Math.random()*2.2+.8,
-      col,
+      vx:(Math.random()-.5)*.3,vy:(Math.random()-.5)*.3,
+      r:Math.random()*2+1.2,
+      col,dends,
       phase:Math.random()*Math.PI*2,
-      isNode:Math.random()>.4,
-      brightness:Math.random()*.5+.5
+      fireTimer:Math.random()*600,
+      firing:0 // 0→1 during fire, fades back
     });
   }
 
-  // --- DATA STREAMS (travelling pulses along connections) ---
-  const streams=[];
-  function spawnStream(){
-    if(streams.length>30)return;
-    const a=particles[~~(Math.random()*particles.length)];
-    const b=particles[~~(Math.random()*particles.length)];
-    if(a===b)return;
-    const dx=a.x-b.x,dy=a.y-b.y;
-    if(Math.sqrt(dx*dx+dy*dy)<250){
-      streams.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,t:0,speed:.015+Math.random()*.02,
-        col:COLORS[~~(Math.random()*COLORS.length)]});
-    }
+  // --- SYNAPTIC PULSES ---
+  const pulses=[];
+  function spawnPulse(a,b){
+    if(pulses.length>40)return;
+    // Compute a curved control point for the bezier
+    const mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+    const dx=b.x-a.x,dy=b.y-a.y;
+    const off=(Math.random()-.5)*60;
+    const cx=mx+(-dy/Math.sqrt(dx*dx+dy*dy+1))*off;
+    const cy=my+(dx/Math.sqrt(dx*dx+dy*dy+1))*off;
+    const col=a.col;
+    pulses.push({ax:a.x,ay:a.y,bx:b.x,by:b.y,cx,cy,t:0,
+      speed:.012+Math.random()*.015,col,size:1.5+Math.random()*1.5});
+  }
+
+  // Bezier point helper
+  function bezPt(ax,ay,cx,cy,bx,by,t){
+    const u=1-t;
+    return{x:u*u*ax+2*u*t*cx+t*t*bx,y:u*u*ay+2*u*t*cy+t*t*by};
   }
 
   let frame=0;
 
   function loop(){
-    ctx.clearRect(0,0,w,h);
+    // Fade trail instead of full clear (ghosting effect)
+    ctx.fillStyle='rgba(6,6,10,.12)';
+    ctx.fillRect(0,0,w,h);
     frame++;
 
-    // --- Hexagonal grid pattern ---
-    ctx.strokeStyle='rgba(43,142,175,.04)';
-    ctx.lineWidth=.5;
-    for(let x=-GRID;x<w+GRID;x+=GRID){
-      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,h);ctx.stroke();
-    }
-    for(let y=-GRID;y<h+GRID;y+=GRID){
-      ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(w,y);ctx.stroke();
-    }
-    // Diagonal accent lines
-    ctx.strokeStyle='rgba(139,92,246,.02)';
-    for(let x=-h;x<w+h;x+=GRID*3){
-      ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x+h,h);ctx.stroke();
-    }
-
-    // --- Draw connections ---
-    for(let i=0;i<particles.length;i++){
-      for(let j=i+1;j<particles.length;j++){
-        const dx=particles[i].x-particles[j].x;
-        const dy=particles[i].y-particles[j].y;
+    // --- AXON CONNECTIONS (curved organic lines) ---
+    for(let i=0;i<neurons.length;i++){
+      for(let j=i+1;j<neurons.length;j++){
+        const dx=neurons[i].x-neurons[j].x;
+        const dy=neurons[i].y-neurons[j].y;
         const d=Math.sqrt(dx*dx+dy*dy);
-        if(d<240){
-          const alpha=(1-d/240)*.22;
-          // L-shaped circuit lines for nodes
-          if(particles[i].isNode&&particles[j].isNode&&d<160){
-            ctx.strokeStyle=`rgba(43,142,175,${alpha*1.3})`;
-            ctx.lineWidth=.8;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x,particles[i].y);
-            ctx.lineTo(particles[i].x,particles[j].y);
-            ctx.lineTo(particles[j].x,particles[j].y);
-            ctx.stroke();
-            // Junction dot
-            ctx.fillStyle=`rgba(91,196,212,${alpha*2})`;
-            ctx.beginPath();
-            ctx.arc(particles[i].x,particles[j].y,1.5,0,Math.PI*2);
-            ctx.fill();
-          }else{
-            ctx.strokeStyle=`rgba(91,196,212,${alpha})`;
-            ctx.lineWidth=.5;
-            ctx.beginPath();
-            ctx.moveTo(particles[i].x,particles[i].y);
-            ctx.lineTo(particles[j].x,particles[j].y);
-            ctx.stroke();
+        if(d<200){
+          const alpha=(1-d/200)*.15;
+          const mx=(neurons[i].x+neurons[j].x)/2;
+          const my=(neurons[i].y+neurons[j].y)/2;
+          // Slight curve offset based on index for organic feel
+          const perpX=-(neurons[i].y-neurons[j].y)/d;
+          const perpY=(neurons[i].x-neurons[j].x)/d;
+          const curveAmt=Math.sin(i*j*.1)*20;
+          const cx2=mx+perpX*curveAmt;
+          const cy2=my+perpY*curveAmt;
+
+          ctx.strokeStyle=`rgba(43,142,175,${alpha})`;
+          ctx.lineWidth=.6;
+          ctx.beginPath();
+          ctx.moveTo(neurons[i].x,neurons[i].y);
+          ctx.quadraticCurveTo(cx2,cy2,neurons[j].x,neurons[j].y);
+          ctx.stroke();
+
+          // Synapse glow at midpoint when either neuron is firing
+          const fireMax=Math.max(neurons[i].firing,neurons[j].firing);
+          if(fireMax>.1){
+            const pt=bezPt(neurons[i].x,neurons[i].y,cx2,cy2,neurons[j].x,neurons[j].y,.5);
+            ctx.fillStyle=`rgba(91,196,212,${fireMax*.15})`;
+            ctx.beginPath();ctx.arc(pt.x,pt.y,3+fireMax*4,0,Math.PI*2);ctx.fill();
           }
         }
       }
     }
 
-    // --- Data streams ---
-    if(frame%8===0)spawnStream();
-    for(let s=streams.length-1;s>=0;s--){
-      const st=streams[s];
-      st.t+=st.speed;
-      if(st.t>1){streams.splice(s,1);continue;}
-      const x=st.ax+(st.bx-st.ax)*st.t;
-      const y=st.ay+(st.by-st.ay)*st.t;
-      const alpha=Math.sin(st.t*Math.PI)*.9;
-      // Bright pulse dot
-      ctx.fillStyle=`rgba(${st.col[0]},${st.col[1]},${st.col[2]},${alpha})`;
-      ctx.beginPath();ctx.arc(x,y,2.5,0,Math.PI*2);ctx.fill();
-      // Glow
-      ctx.fillStyle=`rgba(${st.col[0]},${st.col[1]},${st.col[2]},${alpha*.2})`;
-      ctx.beginPath();ctx.arc(x,y,10,0,Math.PI*2);ctx.fill();
-      // Trail
-      const tx=st.ax+(st.bx-st.ax)*Math.max(0,st.t-.08);
-      const ty=st.ay+(st.by-st.ay)*Math.max(0,st.t-.08);
-      ctx.strokeStyle=`rgba(${st.col[0]},${st.col[1]},${st.col[2]},${alpha*.4})`;
-      ctx.lineWidth=1.2;
-      ctx.beginPath();ctx.moveTo(tx,ty);ctx.lineTo(x,y);ctx.stroke();
+    // --- SYNAPTIC PULSES (travelling along curved paths) ---
+    if(frame%6===0){
+      // Pick a firing neuron to send pulse
+      const firing=neurons.filter(n=>n.firing>.3);
+      if(firing.length>0){
+        const src=firing[~~(Math.random()*firing.length)];
+        // Find a nearby neuron
+        for(const tgt of neurons){
+          if(tgt===src)continue;
+          const dx=src.x-tgt.x,dy=src.y-tgt.y;
+          if(Math.sqrt(dx*dx+dy*dy)<200&&Math.random()<.3){
+            spawnPulse(src,tgt);
+            break;
+          }
+        }
+      }
     }
 
-    // --- Draw particles ---
-    for(const p of particles){
-      p.phase+=.018;
-      const pulse=1+Math.sin(p.phase)*.2;
-      const r=p.r*pulse;
-      const b=p.brightness;
+    for(let s=pulses.length-1;s>=0;s--){
+      const p=pulses[s];
+      p.t+=p.speed;
+      if(p.t>1){
+        // When pulse arrives, trigger a small fire on the target
+        for(const n of neurons){
+          const dx=n.x-p.bx,dy=n.y-p.by;
+          if(Math.sqrt(dx*dx+dy*dy)<30){n.firing=Math.min(n.firing+.4,1);break;}
+        }
+        pulses.splice(s,1);continue;
+      }
+      const pt=bezPt(p.ax,p.ay,p.cx,p.cy,p.bx,p.by,p.t);
+      const alpha=Math.sin(p.t*Math.PI);
 
-      ctx.globalAlpha=1;
+      // Bright core
+      ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha*.9})`;
+      ctx.beginPath();ctx.arc(pt.x,pt.y,p.size,0,Math.PI*2);ctx.fill();
+      // Outer glow
+      ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha*.12})`;
+      ctx.beginPath();ctx.arc(pt.x,pt.y,p.size*7,0,Math.PI*2);ctx.fill();
+      // Trail (previous position)
+      const pt2=bezPt(p.ax,p.ay,p.cx,p.cy,p.bx,p.by,Math.max(0,p.t-.06));
+      ctx.strokeStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${alpha*.35})`;
+      ctx.lineWidth=1;
+      ctx.beginPath();ctx.moveTo(pt2.x,pt2.y);ctx.lineTo(pt.x,pt.y);ctx.stroke();
+    }
 
-      if(p.isNode){
-        // Square node
-        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${.55*b})`;
-        ctx.fillRect(p.x-r,p.y-r,r*2,r*2);
-        // Border glow
-        ctx.strokeStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${.25*b})`;
-        ctx.lineWidth=.6;
-        ctx.strokeRect(p.x-r-1,p.y-r-1,r*2+2,r*2+2);
-      }else{
-        // Circle particle
-        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${.6*b})`;
-        ctx.beginPath();ctx.arc(p.x,p.y,r,0,Math.PI*2);ctx.fill();
+    // --- DRAW NEURONS ---
+    for(const n of neurons){
+      n.phase+=.012;
+      n.fireTimer--;
+
+      // Spontaneous firing
+      if(n.fireTimer<=0){
+        n.firing=1;
+        n.fireTimer=300+Math.random()*500;
       }
 
-      // Glow halo on larger particles
-      if(r>1.8){
-        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},${.06*b})`;
-        ctx.beginPath();ctx.arc(p.x,p.y,r*6,0,Math.PI*2);ctx.fill();
+      // Fade firing
+      n.firing*=.985;
+
+      const pulse=1+Math.sin(n.phase)*.15;
+      const r=n.r*pulse;
+      const f=n.firing;
+
+      // --- Dendrites (small branches) ---
+      for(const d of n.dends){
+        const ex=n.x+Math.cos(d.a+n.phase*.1)*d.len;
+        const ey=n.y+Math.sin(d.a+n.phase*.1)*d.len;
+        ctx.strokeStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.12+f*.2})`;
+        ctx.lineWidth=.5;
+        ctx.beginPath();ctx.moveTo(n.x,n.y);ctx.lineTo(ex,ey);ctx.stroke();
+        // Dendrite tip
+        ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.2+f*.3})`;
+        ctx.beginPath();ctx.arc(ex,ey,.8,0,Math.PI*2);ctx.fill();
+        // Sub-branch
+        if(d.branches){
+          const bx=ex+Math.cos(d.a+.6)*d.len*.4;
+          const by=ey+Math.sin(d.a+.6)*d.len*.4;
+          ctx.strokeStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.06+f*.1})`;
+          ctx.beginPath();ctx.moveTo(ex,ey);ctx.lineTo(bx,by);ctx.stroke();
+        }
       }
 
-      // Random bright flash
-      if(Math.random()<.0008){
-        ctx.fillStyle=`rgba(${p.col[0]},${p.col[1]},${p.col[2]},.5)`;
-        ctx.beginPath();ctx.arc(p.x,p.y,r*12,0,Math.PI*2);ctx.fill();
+      // --- Soma (cell body) ---
+      // Outer glow (stronger when firing)
+      if(f>.05){
+        ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${f*.08})`;
+        ctx.beginPath();ctx.arc(n.x,n.y,r*10+f*15,0,Math.PI*2);ctx.fill();
       }
+      // Mid glow
+      ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.04+f*.1})`;
+      ctx.beginPath();ctx.arc(n.x,n.y,r*4,0,Math.PI*2);ctx.fill();
+      // Core
+      ctx.fillStyle=`rgba(${n.col[0]},${n.col[1]},${n.col[2]},${.45+f*.5})`;
+      ctx.beginPath();ctx.arc(n.x,n.y,r,0,Math.PI*2);ctx.fill();
+      // Bright center
+      ctx.fillStyle=`rgba(255,255,255,${.1+f*.4})`;
+      ctx.beginPath();ctx.arc(n.x,n.y,r*.4,0,Math.PI*2);ctx.fill();
 
-      // Move
-      p.x+=p.vx;p.y+=p.vy;
-      if(p.x<-20)p.x=w+20;if(p.x>w+20)p.x=-20;
-      if(p.y<-20)p.y=h+20;if(p.y>h+20)p.y=-20;
+      // Move (slow organic drift)
+      n.x+=n.vx;n.y+=n.vy;
+      // Gentle oscillation
+      n.x+=Math.sin(n.phase*.7)*.15;
+      n.y+=Math.cos(n.phase*.5)*.15;
+      if(n.x<-30)n.x=w+30;if(n.x>w+30)n.x=-30;
+      if(n.y<-30)n.y=h+30;if(n.y>h+30)n.y=-30;
     }
 
     requestAnimationFrame(loop);
   }
+  // Initial clear
+  ctx.fillStyle='rgba(6,6,10,1)';ctx.fillRect(0,0,w,h);
   loop();
 })();
 
