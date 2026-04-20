@@ -150,6 +150,93 @@ img{max-width:100%;display:block}
 .reveal.visible{opacity:1;transform:translateY(0)}
 .reveal-d1{transition-delay:.1s}.reveal-d2{transition-delay:.2s}.reveal-d3{transition-delay:.3s}.reveal-d4{transition-delay:.35s}
 
+
+
+/* ===== MOCKUPS SHOWCASE (v9.69) — réplicas vetoriais das telas do PriceLab ===== */
+.showcase{padding:120px 0;position:relative;background:linear-gradient(180deg,#F7F5F0 0%,#FAFAF7 100%)}
+.showcase-header{text-align:center;margin-bottom:60px;max-width:700px;margin-left:auto;margin-right:auto}
+.showcase-eyebrow{font-size:11px;font-weight:800;letter-spacing:2.5px;text-transform:uppercase;color:#8B6914;margin-bottom:14px}
+.showcase-title{font-size:42px;font-weight:900;color:#0F0F0F;letter-spacing:-1.8px;line-height:1.08;margin-bottom:16px}
+.showcase-title .g{background:linear-gradient(90deg,#8B6914,#D4A017,#B8860B);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.showcase-sub{font-size:16px;color:#3A3A3A;line-height:1.6}
+.showcase-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:28px;max-width:1200px;margin:0 auto}
+@media (max-width:900px){.showcase-grid{grid-template-columns:1fr}}
+
+.mock-wrap{background:#FFFFFF;border-radius:20px;border:1px solid rgba(139,105,20,.12);box-shadow:0 8px 32px rgba(26,26,26,.06),0 2px 8px rgba(139,105,20,.04);overflow:hidden;position:relative;transform-style:preserve-3d;transition:transform .5s cubic-bezier(.16,1,.3,1),box-shadow .5s ease;will-change:transform}
+.mock-wrap:hover{transform:translateY(-8px) rotateX(2deg);box-shadow:0 28px 60px rgba(26,26,26,.12),0 6px 20px rgba(139,105,20,.1)}
+.mock-label{padding:22px 26px 16px;border-bottom:1px solid rgba(139,105,20,.06)}
+.mock-label-tag{display:inline-flex;align-items:center;gap:8px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:1.5px;color:#8B6914;background:rgba(139,105,20,.08);padding:4px 10px;border-radius:4px;margin-bottom:10px}
+.mock-label-h{font-size:18px;font-weight:800;color:#0F0F0F;letter-spacing:-.3px;margin-bottom:4px}
+.mock-label-sub{font-size:12px;color:#5A5A5A;line-height:1.5}
+.mock-viewport{padding:18px 20px 22px;background:linear-gradient(180deg,#FAFAF7 0%,#FFFFFF 100%)}
+
+/* --- Mockup: MATRIZ DE CALOR --- */
+.mck-heat{font-family:inherit}
+.mck-heat-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:8px}
+.mck-heat-title{font-size:11px;font-weight:800;color:#0F0F0F;letter-spacing:-.1px}
+.mck-heat-toggle{display:inline-flex;gap:2px;background:#F1F5F9;border-radius:5px;padding:2px}
+.mck-heat-toggle span{font-size:8px;font-weight:800;padding:3px 8px;border-radius:3px;color:#475569;text-transform:uppercase;letter-spacing:.5px}
+.mck-heat-toggle span.on{background:#0F172A;color:#fff}
+.mck-heat-grid{display:grid;grid-template-columns:36px repeat(7,1fr);gap:3px;font-size:9px;font-variant-numeric:tabular-nums}
+.mck-heat-grid .hcell{padding:5px 2px;text-align:center;border-radius:3px;font-weight:700;color:#0F0F0F}
+.mck-heat-grid .head{background:#F1F5F9;color:#475569;font-size:8px}
+.mck-heat-grid .row-label{background:#F1F5F9;color:#475569;font-size:8px;display:flex;align-items:center;justify-content:center}
+/* faixas de cor do heatmap */
+.mck-heat-grid .red{background:#fecaca;color:#7f1d1d}
+.mck-heat-grid .orange{background:#fed7aa;color:#9a3412}
+.mck-heat-grid .yellow{background:#fef3c7;color:#92400e}
+.mck-heat-grid .green{background:#bbf7d0;color:#166534}
+.mck-heat-grid .green2{background:#86efac;color:#14532d}
+.mck-heat-grid .sel{outline:2px solid #0F172A;outline-offset:-1px;font-weight:800}
+
+/* --- Mockup: RCPT DECOMPOSIÇÃO --- */
+.mck-rcpt-hd{display:flex;align-items:center;justify-content:space-between;padding:8px 14px;background:linear-gradient(135deg,#D4A017,#B8860B);color:#fff;border-radius:8px;margin-bottom:10px;font-size:10px;font-weight:800;letter-spacing:.3px}
+.mck-rcpt-grid{display:grid;grid-template-columns:70px 60px 1fr 1fr 60px;gap:4px 10px;font-size:8.5px;color:#0F0F0F;padding:2px;font-variant-numeric:tabular-nums}
+.mck-rcpt-grid .h{font-size:7px;color:#6A6A6A;font-weight:800;text-transform:uppercase;letter-spacing:.6px;border-bottom:1px solid rgba(139,105,20,.1);padding-bottom:4px}
+.mck-rcpt-grid .rw{padding:5px 0;border-bottom:1px dotted rgba(139,105,20,.08)}
+.mck-rcpt-grid .rw.tot{border-top:1.5px solid #0F0F0F;border-bottom:none;padding-top:7px;margin-top:2px;font-weight:800;color:#8B6914}
+.mck-rcpt-box{background:rgba(139,105,20,.05);border:1px solid rgba(139,105,20,.15);border-radius:8px;padding:10px 12px;margin-top:10px;display:flex;align-items:center;justify-content:space-between}
+.mck-rcpt-box .lbl{font-size:9px;color:#8B6914;font-weight:800;text-transform:uppercase;letter-spacing:.8px}
+.mck-rcpt-box .val{font-size:16px;font-weight:900;color:#0F0F0F;letter-spacing:-.4px}
+.mck-rcpt-box .val .pct{font-size:11px;color:#8B6914;margin-left:6px}
+
+/* --- Mockup: PREDITIVO --- */
+.mck-pred-stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:12px}
+.mck-pred-card{background:#FFFFFF;border:1px solid rgba(139,105,20,.1);border-radius:8px;padding:10px 12px}
+.mck-pred-card.crit{border-color:#fca5a5;background:#fef2f2}
+.mck-pred-card.ok{border-color:#86efac;background:#f0fdf4}
+.mck-pred-card.warn{border-color:#fdba74;background:#fff7ed}
+.mck-pred-card .lbl{font-size:7.5px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:#6A6A6A;margin-bottom:4px}
+.mck-pred-card.crit .lbl{color:#b91c1c}
+.mck-pred-card.ok .lbl{color:#15803d}
+.mck-pred-card.warn .lbl{color:#c2410c}
+.mck-pred-card .val{font-size:13px;font-weight:900;color:#0F0F0F;letter-spacing:-.3px;margin-bottom:2px}
+.mck-pred-card .sub{font-size:8px;color:#6A6A6A;line-height:1.3}
+.mck-pred-chart{height:80px;background:linear-gradient(180deg,rgba(139,105,20,.03),transparent);border-radius:6px;padding:8px 12px;position:relative;margin-top:8px}
+.mck-pred-chart svg{width:100%;height:100%}
+.mck-pred-legend{display:flex;justify-content:space-between;font-size:7px;color:#8A8A8A;margin-top:4px;letter-spacing:.3px;text-transform:uppercase;font-weight:700}
+
+/* --- Mockup: CADASTRO — seletor de regime --- */
+.mck-cad-hd{font-size:11px;font-weight:800;color:#0F0F0F;margin-bottom:12px;letter-spacing:-.2px}
+.mck-cad-regimes{display:grid;grid-template-columns:repeat(3,1fr);gap:6px}
+.mck-cad-reg{border:1px solid rgba(139,105,20,.1);border-radius:8px;padding:9px 10px;background:#FFFFFF;transition:all .2s}
+.mck-cad-reg.sel{border-color:#8B6914;background:rgba(139,105,20,.06);box-shadow:0 2px 6px rgba(139,105,20,.08)}
+.mck-cad-reg .ic{font-size:16px;margin-bottom:4px}
+.mck-cad-reg .nm{font-size:10px;font-weight:800;color:#0F0F0F;margin-bottom:2px;letter-spacing:-.1px}
+.mck-cad-reg .hp{font-size:8px;color:#6A6A6A;line-height:1.3}
+.mck-cad-reg .pill{display:inline-block;font-size:7px;font-weight:800;background:#8B6914;color:#fff;padding:1px 6px;border-radius:2px;text-transform:uppercase;letter-spacing:.4px;margin-left:4px}
+.mck-cad-fields{display:grid;grid-template-columns:1fr 1fr;gap:7px;margin-top:12px}
+.mck-cad-fld{background:rgba(139,105,20,.03);border:1px dashed rgba(139,105,20,.15);border-radius:6px;padding:7px 10px}
+.mck-cad-fld .l{font-size:7px;color:#8B6914;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px}
+.mck-cad-fld .v{font-size:10px;font-weight:700;color:#0F0F0F;font-variant-numeric:tabular-nums}
+.mck-cad-help{background:rgba(139,105,20,.04);border:1px dashed rgba(139,105,20,.2);border-radius:6px;padding:8px 10px;margin-top:10px;font-size:8px;color:#8B6914;line-height:1.4;display:flex;gap:6px;align-items:flex-start}
+
+/* Reveals dos mocks (cada um tem delay próprio) */
+.mock-wrap.reveal-d1{transition-delay:.1s}
+.mock-wrap.reveal-d2{transition-delay:.2s}
+.mock-wrap.reveal-d3{transition-delay:.3s}
+.mock-wrap.reveal-d4{transition-delay:.4s}
+
 /* ===== SECTION SPACING ===== */
 section{position:relative;z-index:2}
 .section-pad{padding:120px 0}
@@ -707,6 +794,168 @@ section{position:relative;z-index:2}
           <p>Receba preços otimizados para Mercado Livre, Amazon, Shopee e TikTok Shop. Com ROI, margem líquida e ficha de anúncio prontos para publicar.</p>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SHOWCASE MOCKUPS (v9.69) -->
+<section class="showcase" id="dentro-pricelab">
+  <div class="container">
+    <div class="showcase-header reveal">
+      <div class="showcase-eyebrow">Dentro do PriceLab</div>
+      <h2 class="showcase-title">Quatro telas que mostram <span class="g">o que é rigor fiscal</span>.</h2>
+      <p class="showcase-sub">Cada decisão de preço é auditável linha a linha. Cada tributo tem base legal. Cada cálculo reproduz o modelo oficial da RFB.</p>
+    </div>
+
+    <div class="showcase-grid">
+      <!-- Mock 1: MATRIZ DE CALOR -->
+      <div class="mock-wrap reveal reveal-d1">
+        <div class="mock-label">
+          <div class="mock-label-tag"><span style="width:6px;height:6px;border-radius:50%;background:#8B6914"></span>Calculadora Reversa</div>
+          <div class="mock-label-h">Matriz de Decisões</div>
+          <div class="mock-label-sub">Mapeie combinações de custo × preço e veja o ROI resultante de cada decisão.</div>
+        </div>
+        <div class="mock-viewport">
+          <div class="mck-heat">
+            <div class="mck-heat-head">
+              <div class="mck-heat-title">ROI por combinação — range ±15%</div>
+              <div class="mck-heat-toggle"><span class="on">ROI</span><span>Margem</span><span>Lucro</span></div>
+            </div>
+            <div class="mck-heat-grid">
+              <div class="hcell head"></div>
+              <div class="hcell head">−15</div><div class="hcell head">−10</div><div class="hcell head">−5</div><div class="hcell head">0</div><div class="hcell head">+5</div><div class="hcell head">+10</div><div class="hcell head">+15</div>
+              <div class="hcell row-label">+15</div>
+              <div class="hcell green2">62%</div><div class="hcell green2">54%</div><div class="hcell green">46%</div><div class="hcell green">39%</div><div class="hcell green">32%</div><div class="hcell yellow">26%</div><div class="hcell yellow">20%</div>
+              <div class="hcell row-label">+10</div>
+              <div class="hcell green">51%</div><div class="hcell green">44%</div><div class="hcell green">37%</div><div class="hcell yellow">30%</div><div class="hcell yellow">24%</div><div class="hcell yellow">18%</div><div class="hcell orange">12%</div>
+              <div class="hcell row-label">+5</div>
+              <div class="hcell green">42%</div><div class="hcell yellow">35%</div><div class="hcell yellow">28%</div><div class="hcell yellow sel">22%</div><div class="hcell orange">16%</div><div class="hcell orange">10%</div><div class="hcell orange">4%</div>
+              <div class="hcell row-label">0</div>
+              <div class="hcell yellow">33%</div><div class="hcell yellow">26%</div><div class="hcell orange">20%</div><div class="hcell orange">14%</div><div class="hcell orange">8%</div><div class="hcell red">2%</div><div class="hcell red">−4%</div>
+              <div class="hcell row-label">−5</div>
+              <div class="hcell orange">24%</div><div class="hcell orange">17%</div><div class="hcell orange">11%</div><div class="hcell red">5%</div><div class="hcell red">−1%</div><div class="hcell red">−7%</div><div class="hcell red">−13%</div>
+              <div class="hcell row-label">−10</div>
+              <div class="hcell orange">15%</div><div class="hcell red">9%</div><div class="hcell red">3%</div><div class="hcell red">−3%</div><div class="hcell red">−9%</div><div class="hcell red">−15%</div><div class="hcell red">−21%</div>
+            </div>
+            <div style="font-size:8px;color:#6A6A6A;margin-top:8px;text-align:center;letter-spacing:.3px">↑ Aumento de preço (%)  ·  ← Redução de custo (%) →</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mock 2: RCPT DECOMPOSIÇÃO FISCAL -->
+      <div class="mock-wrap reveal reveal-d2">
+        <div class="mock-label">
+          <div class="mock-label-tag"><span style="width:6px;height:6px;border-radius:50%;background:#8B6914"></span>RCPT · Composição Tributária</div>
+          <div class="mock-label-h">Decomposição auditável</div>
+          <div class="mock-label-sub">Cada tributo com alíquota efetiva, base, valor e referência legal.</div>
+        </div>
+        <div class="mock-viewport">
+          <div class="mck-rcpt-hd">
+            <span>Mercado Livre · Clássico · Lucro Real</span>
+            <span>Preço R$ 149,00</span>
+          </div>
+          <div class="mck-rcpt-grid">
+            <div class="h">Tributo</div><div class="h">Alíq.</div><div class="h">Base</div><div class="h">Referência</div><div class="h" style="text-align:right">Valor</div>
+            <div class="rw">IRPJ</div><div class="rw">2,82%</div><div class="rw">R$ 149,00</div><div class="rw">Lei 9.249/95</div><div class="rw" style="text-align:right">R$ 4,20</div>
+            <div class="rw">CSLL</div><div class="rw">1,59%</div><div class="rw">R$ 149,00</div><div class="rw">Lei 7.689/88</div><div class="rw" style="text-align:right">R$ 2,37</div>
+            <div class="rw">PIS</div><div class="rw">1,30%</div><div class="rw">R$ 149,00</div><div class="rw">Lei 10.637/02</div><div class="rw" style="text-align:right">R$ 1,94</div>
+            <div class="rw">COFINS</div><div class="rw">6,00%</div><div class="rw">R$ 149,00</div><div class="rw">Lei 10.833/03</div><div class="rw" style="text-align:right">R$ 8,94</div>
+            <div class="rw">ICMS</div><div class="rw">18,00%</div><div class="rw">R$ 149,00</div><div class="rw">RICMS-SP</div><div class="rw" style="text-align:right">R$ 26,82</div>
+            <div class="rw">IPI</div><div class="rw">0,00%</div><div class="rw">R$ 149,00</div><div class="rw">RIPI Dec. 7.212/10</div><div class="rw" style="text-align:right">R$ 0,00</div>
+            <div class="rw tot">TOTAL</div><div class="rw tot"></div><div class="rw tot"></div><div class="rw tot"></div><div class="rw tot" style="text-align:right">R$ 44,27</div>
+          </div>
+          <div class="mck-rcpt-box">
+            <span class="lbl">Carga efetiva total</span>
+            <span class="val">R$ 44,27 <span class="pct">29,71%</span></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mock 3: PREDITIVO TRIBUTÁRIO -->
+      <div class="mock-wrap reveal reveal-d3">
+        <div class="mock-label">
+          <div class="mock-label-tag"><span style="width:6px;height:6px;border-radius:50%;background:#8B6914"></span>Preditivo Tributário</div>
+          <div class="mock-label-h">Projeção de gatilhos fiscais</div>
+          <div class="mock-label-sub">Adicional IRPJ 10%, teto de regime, prejuízo fiscal — antes de acontecer.</div>
+        </div>
+        <div class="mock-viewport">
+          <div class="mck-pred-stats">
+            <div class="mck-pred-card ok">
+              <div class="lbl">Adicional IRPJ</div>
+              <div class="val">Inativo</div>
+              <div class="sub">Faltam R$ 18k de base trimestral</div>
+            </div>
+            <div class="mck-pred-card warn">
+              <div class="lbl">% do teto</div>
+              <div class="val">54,3%</div>
+              <div class="sub">Margem de R$ 35,6M até migração</div>
+            </div>
+            <div class="mck-pred-card crit">
+              <div class="lbl">Prejuízo acum.</div>
+              <div class="val">R$ 82k</div>
+              <div class="sub">4 anos para exaurir</div>
+            </div>
+          </div>
+          <div style="font-size:8px;color:#6A6A6A;font-weight:800;text-transform:uppercase;letter-spacing:1px;margin-bottom:6px">Trajetória · próximos 24 meses</div>
+          <div class="mck-pred-chart">
+            <svg viewBox="0 0 400 80" preserveAspectRatio="none">
+              <defs>
+                <linearGradient id="predGrad" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stop-color="#D4A017" stop-opacity=".3"/>
+                  <stop offset="100%" stop-color="#D4A017" stop-opacity="0"/>
+                </linearGradient>
+              </defs>
+              <path d="M0,64 L40,60 L80,56 L120,50 L160,43 L200,37 L240,32 L280,28 L320,24 L360,22 L400,20 L400,80 L0,80 Z" fill="url(#predGrad)"/>
+              <path d="M0,64 L40,60 L80,56 L120,50 L160,43 L200,37 L240,32 L280,28 L320,24 L360,22 L400,20" fill="none" stroke="#8B6914" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              <!-- marcador gatilho IRPJ -->
+              <circle cx="220" cy="34" r="4" fill="#ea580c" stroke="#fff" stroke-width="1.5"/>
+              <line x1="220" y1="34" x2="220" y2="0" stroke="#ea580c" stroke-width="1" stroke-dasharray="2 2" opacity=".5"/>
+              <text x="224" y="12" fill="#c2410c" font-size="7" font-weight="800">⚠ Adicional ativa</text>
+            </svg>
+          </div>
+          <div class="mck-pred-legend">
+            <span>Hoje</span><span>M+6</span><span>M+12</span><span>M+18</span><span>M+24</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mock 4: CADASTRO REGIME TRIBUTÁRIO -->
+      <div class="mock-wrap reveal reveal-d4">
+        <div class="mock-label">
+          <div class="mock-label-tag"><span style="width:6px;height:6px;border-radius:50%;background:#8B6914"></span>Cadastro · Regime Tributário</div>
+          <div class="mock-label-h">Seleção polimórfica</div>
+          <div class="mock-label-sub">Simples, Presumido ou Real — cada um com seu formulário e cálculo dedicado.</div>
+        </div>
+        <div class="mock-viewport">
+          <div class="mck-cad-hd">Define como PriceLab calcula a carga fiscal</div>
+          <div class="mck-cad-regimes">
+            <div class="mck-cad-reg">
+              <div class="ic">📗</div>
+              <div class="nm">Simples Nacional</div>
+              <div class="hp">Fat até R$ 4,8M. DAS unificado.</div>
+            </div>
+            <div class="mck-cad-reg">
+              <div class="ic">📙</div>
+              <div class="nm">Lucro Presumido</div>
+              <div class="hp">Fat até R$ 78M. Base presumida.</div>
+            </div>
+            <div class="mck-cad-reg sel">
+              <div class="ic">📕</div>
+              <div class="nm">Lucro Real <span class="pill">ATIVO</span></div>
+              <div class="hp">Lucro efetivo. ECD/ECF obrigatórias.</div>
+            </div>
+          </div>
+          <div class="mck-cad-fields">
+            <div class="mck-cad-fld"><div class="l">Custos anuais (R$)</div><div class="v">1.680.000,00</div></div>
+            <div class="mck-cad-fld"><div class="l">Despesas (R$)</div><div class="v">420.000,00</div></div>
+            <div class="mck-cad-fld"><div class="l">Base crédito PIS/COFINS</div><div class="v">588.000,00</div></div>
+            <div class="mck-cad-fld"><div class="l">Prejuízo fiscal acum.</div><div class="v">82.000,00</div></div>
+          </div>
+          <div class="mck-cad-help"><span style="font-size:10px">💡</span><span><strong>Fonte:</strong> DRE contábil e SPED Contribuições. Se ainda não tem, PriceLab usa ratios conservadores do setor (60% CMV, 15% despesas, 35% crédito).</span></div>
+        </div>
+      </div>
+
     </div>
   </div>
 </section>
