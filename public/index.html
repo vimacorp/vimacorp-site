@@ -5,17 +5,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>VIMA CORP | Tech & AI for Retail Ecosystems</title>
 <meta name="description" content="Ferramentas de inteligência artificial para marketplaces brasileiros. PriceLab — precificação estratégica. CatalogiQ — análise inteligente de catálogos.">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0a'/><text x='50' y='42' font-family='system-ui' font-size='24' font-weight='900' fill='white' text-anchor='middle'>VIMA</text><text x='50' y='72' font-family='system-ui' font-size='24' font-weight='400' fill='%232B8EAF' text-anchor='middle'>CORP</text></svg>">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%230a0a0a'/><text x='50' y='42' font-family='system-ui' font-size='24' font-weight='900' fill='white' text-anchor='middle'>VIMA</text><text x='50' y='72' font-family='system-ui' font-size='24' font-weight='400' fill='%23D4A017' text-anchor='middle'>CORP</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ===== RESET & VARIABLES ===== */
 *{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --dark:#06060a;--dark2:#0a0a12;--dark3:#12121e;
-  --blue1:#0c2340;--blue2:#1a6fa0;--blue3:#2B8EAF;--cyan:#5BC4D4;
+  --dark:#0B0F14;--dark2:#141921;--dark3:#1C2028;
+  --blue1:#262C36;--blue2:#8B6914;--blue3:#D4A017;--cyan:#F4C430;
+  --gold:#D4A017;--gold-light:#F4C430;--gold-soft:#E8BA3A;--gold-dim:#8B6914;
   --orange:#f97316;--orange2:#fb923c;--red:#ef4444;
   --g300:#d4d4d8;--g400:#a1a1aa;--g500:#71717a;--g600:#52525b;--g700:#3f3f46;
-  --card:rgba(18,18,30,.8);--card-border:rgba(255,255,255,.1);
+  --card:rgba(28,32,40,.8);--card-border:rgba(255,255,255,.1);
   --max-w:1140px;
 }
 html{scroll-behavior:smooth}
@@ -26,12 +27,36 @@ img{max-width:100%;display:block}
 
 /* ===== GRID BG ===== */
 .grid-bg{position:fixed;inset:0;z-index:0;pointer-events:none;
-  background-image:linear-gradient(rgba(43,142,175,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(43,142,175,.03) 1px,transparent 1px);
+  background-image:linear-gradient(rgba(212,160,23,.03) 1px,transparent 1px),linear-gradient(90deg,rgba(212,160,23,.03) 1px,transparent 1px);
   background-size:64px 64px}
 .grid-bg::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 0%,transparent 0%,var(--dark) 75%)}
 
 /* ===== PARTICLE CANVAS ===== */
 #circuit-canvas{position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.35}
+
+/* ===== v9.66 identidade Tesouro Nacional ===== */
+@keyframes goldShine{0%{background-position:-200% center}100%{background-position:200% center}}
+@keyframes orbFloat1{0%,100%{transform:translate(0,0) scale(1)}25%{transform:translate(40px,-60px) scale(1.08)}50%{transform:translate(-30px,-40px) scale(.95)}75%{transform:translate(60px,30px) scale(1.1)}}
+@keyframes orbFloat2{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(-60px,40px) scale(.92)}66%{transform:translate(40px,-50px) scale(1.08)}}
+@keyframes orbFloat3{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(-40px,60px) scale(1.15)}}
+@keyframes splitReveal{0%{opacity:0;transform:translateY(40px) rotateX(-40deg);filter:blur(20px)}100%{opacity:1;transform:translateY(0) rotateX(0);filter:blur(0)}}
+@keyframes tickerSlide{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes auroraMove{0%,100%{background-position:0% 50%,50% 0%,100% 50%}50%{background-position:100% 50%,50% 100%,0% 50%}}
+@keyframes scanSweep{0%{transform:translateY(-120vh)}100%{transform:translateY(120vh)}}
+@keyframes caretPulse{0%,100%{opacity:1}50%{opacity:.3}}
+.gold-text{background:linear-gradient(90deg,#D4A017 0%,#F4C430 30%,#FFE08A 50%,#F4C430 70%,#D4A017 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:goldShine 6s linear infinite}
+.orb{position:absolute;border-radius:50%;filter:blur(110px);pointer-events:none;will-change:transform;z-index:0}
+.orb-1{width:600px;height:600px;background:radial-gradient(circle,rgba(212,160,23,.32),rgba(212,160,23,0) 70%);top:-120px;left:-100px;animation:orbFloat1 26s ease-in-out infinite}
+.orb-2{width:520px;height:520px;background:radial-gradient(circle,rgba(244,196,48,.26),rgba(244,196,48,0) 70%);top:20%;right:-120px;animation:orbFloat2 30s ease-in-out infinite}
+.orb-3{width:440px;height:440px;background:radial-gradient(circle,rgba(255,224,138,.18),rgba(255,224,138,0) 70%);top:60%;left:45%;animation:orbFloat3 34s ease-in-out infinite}
+.aurora-bg{position:fixed;inset:0;z-index:0;pointer-events:none;background:radial-gradient(ellipse 80% 50% at 20% 20%,rgba(212,160,23,.08),transparent 60%),radial-gradient(ellipse 60% 60% at 80% 30%,rgba(232,186,58,.06),transparent 55%),radial-gradient(ellipse 70% 50% at 50% 100%,rgba(244,196,48,.05),transparent 60%);background-size:200% 200%,200% 200%,200% 200%;animation:auroraMove 22s ease-in-out infinite}
+.scanline{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:1}
+.scanline::before{content:'';position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,rgba(244,196,48,.25),transparent);animation:scanSweep 12s linear infinite;will-change:transform}
+.split-reveal>span{display:inline-block;opacity:0;animation:splitReveal .9s cubic-bezier(.16,1,.3,1) forwards;transform-origin:50% 100%}
+.ticker-wrap{overflow:hidden;mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);-webkit-mask-image:linear-gradient(90deg,transparent,#000 10%,#000 90%,transparent);padding:16px 0;border-top:1px solid rgba(212,160,23,.12);border-bottom:1px solid rgba(212,160,23,.12);margin-top:60px}
+.ticker-track{display:inline-flex;gap:48px;animation:tickerSlide 50s linear infinite;white-space:nowrap;will-change:transform;font-size:12px;color:rgba(247,245,240,.55);font-weight:500;letter-spacing:.3px}
+.ticker-track span{display:inline-flex;align-items:center;gap:10px}
+.ticker-track span::before{content:'';width:5px;height:5px;border-radius:50%;background:rgba(212,160,23,.55)}
 
 /* ===== SCROLL REVEAL ===== */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
@@ -50,7 +75,7 @@ section{position:relative;z-index:2}
 .btn-primary{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:12px;font-size:14px;font-weight:700;font-family:inherit;border:none;cursor:pointer;color:#fff !important;-webkit-text-fill-color:#fff !important;background:linear-gradient(135deg,var(--blue2),var(--cyan));transition:all .3s;text-decoration:none;position:relative;overflow:hidden}
 .btn-primary::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:transform .5s}
 .btn-primary:hover::before{transform:translateX(100%)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(43,142,175,.35);color:#fff !important;-webkit-text-fill-color:#fff !important}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 40px rgba(212,160,23,.35);color:#fff !important;-webkit-text-fill-color:#fff !important}
 .btn-secondary{display:inline-flex;align-items:center;gap:8px;padding:15px 30px;border-radius:12px;font-size:14px;font-weight:600;font-family:inherit;border:1px solid var(--g700);background:transparent;color:var(--g400);cursor:pointer;transition:all .25s;text-decoration:none}
 .btn-secondary:hover{border-color:var(--g500);color:#fff;background:rgba(255,255,255,.03)}
 .btn-orange{background:linear-gradient(135deg,var(--orange),var(--orange2));color:#fff !important;-webkit-text-fill-color:#fff !important}
@@ -69,23 +94,23 @@ section{position:relative;z-index:2}
 .nav-cta{padding:9px 22px;border-radius:8px;font-size:13px;font-weight:600;background:linear-gradient(135deg,var(--blue2),var(--cyan));color:#fff !important;-webkit-text-fill-color:#fff !important;transition:all .25s;text-decoration:none;position:relative;overflow:hidden}
 .nav-cta::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.15),transparent);transform:translateX(-100%);transition:transform .5s}
 .nav-cta:hover::before{transform:translateX(100%)}
-.nav-cta:hover{box-shadow:0 4px 20px rgba(43,142,175,.4);color:#fff !important;-webkit-text-fill-color:#fff !important;transform:translateY(-1px)}
+.nav-cta:hover{box-shadow:0 4px 20px rgba(212,160,23,.4);color:#fff !important;-webkit-text-fill-color:#fff !important;transform:translateY(-1px)}
 .mobile-toggle{display:none;background:none;border:none;color:#fff;cursor:pointer;padding:8px}
 .mobile-toggle svg{width:24px;height:24px}
 
 /* ===== HERO ===== */
 .hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:140px 0 100px}
-.hero-glow-1{position:absolute;top:-15%;left:-5%;width:700px;height:700px;background:radial-gradient(circle,rgba(43,142,175,.12) 0%,transparent 65%);pointer-events:none;animation:gFloat1 8s ease-in-out infinite}
-.hero-glow-2{position:absolute;bottom:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(91,196,212,.08) 0%,transparent 65%);pointer-events:none;animation:gFloat2 10s ease-in-out infinite}
+.hero-glow-1{position:absolute;top:-15%;left:-5%;width:700px;height:700px;background:radial-gradient(circle,rgba(212,160,23,.12) 0%,transparent 65%);pointer-events:none;animation:gFloat1 8s ease-in-out infinite}
+.hero-glow-2{position:absolute;bottom:-20%;right:-10%;width:600px;height:600px;background:radial-gradient(circle,rgba(244,196,48,.08) 0%,transparent 65%);pointer-events:none;animation:gFloat2 10s ease-in-out infinite}
 .hero-glow-3{position:absolute;top:40%;right:20%;width:400px;height:400px;background:radial-gradient(circle,rgba(249,115,22,.05) 0%,transparent 65%);pointer-events:none;animation:gFloat3 12s ease-in-out infinite}
 @keyframes gFloat1{0%,100%{transform:translate(0,0)}50%{transform:translate(30px,-25px)}}
 @keyframes gFloat2{0%,100%{transform:translate(0,0)}50%{transform:translate(-25px,30px)}}
 @keyframes gFloat3{0%,100%{transform:translate(0,0)}50%{transform:translate(15px,-20px)}}
 
 .hero-content{max-width:720px;position:relative;z-index:2}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(43,142,175,.06);border:1px solid rgba(43,142,175,.2);border-radius:100px;padding:7px 18px;font-size:11px;color:var(--cyan);font-weight:600;margin-bottom:32px;letter-spacing:.8px;text-transform:uppercase;backdrop-filter:blur(8px)}
-.hero-badge .dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 8px rgba(91,196,212,.6)}
-@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(91,196,212,.6)}50%{opacity:.3;box-shadow:0 0 2px rgba(91,196,212,.2)}}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(212,160,23,.06);border:1px solid rgba(212,160,23,.2);border-radius:100px;padding:7px 18px;font-size:11px;color:var(--cyan);font-weight:600;margin-bottom:32px;letter-spacing:.8px;text-transform:uppercase;backdrop-filter:blur(8px)}
+.hero-badge .dot{width:6px;height:6px;background:var(--cyan);border-radius:50%;animation:pulse 2s infinite;box-shadow:0 0 8px rgba(244,196,48,.6)}
+@keyframes pulse{0%,100%{opacity:1;box-shadow:0 0 8px rgba(244,196,48,.6)}50%{opacity:.3;box-shadow:0 0 2px rgba(244,196,48,.2)}}
 
 .hero h1{font-size:62px;font-weight:900;line-height:1.06;letter-spacing:-3px;margin-bottom:28px}
 .hero h1 .accent{background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent;white-space:nowrap}
@@ -94,10 +119,10 @@ section{position:relative;z-index:2}
 
 /* ===== ECOSYSTEM ===== */
 .eco-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:56px}
-.eco-card{background:rgba(14,14,26,.9);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:52px 48px;transition:all .35s;position:relative;overflow:hidden}
+.eco-card{background:rgba(20,25,33,.9);border:1px solid rgba(255,255,255,.1);border-radius:24px;padding:52px 48px;transition:all .35s;position:relative;overflow:hidden}
 .eco-card:hover{border-color:rgba(255,255,255,.2);transform:translateY(-6px);box-shadow:0 28px 80px rgba(0,0,0,.4)}
 .eco-card.blue::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--blue2),var(--cyan))}
-.eco-card.blue::after{content:'';position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(180deg,rgba(43,142,175,.06),transparent);pointer-events:none}
+.eco-card.blue::after{content:'';position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(180deg,rgba(212,160,23,.06),transparent);pointer-events:none}
 .eco-card.orange::before{content:'';position:absolute;top:0;left:0;right:0;height:4px;background:linear-gradient(90deg,var(--orange),var(--orange2))}
 .eco-card.orange::after{content:'';position:absolute;top:0;left:0;right:0;height:120px;background:linear-gradient(180deg,rgba(249,115,22,.04),transparent);pointer-events:none}
 .eco-card-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;position:relative;z-index:1}
@@ -126,7 +151,7 @@ section{position:relative;z-index:2}
 
 /* ===== PAIN SECTION ===== */
 .pain-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px}
-.pain-card{background:rgba(18,18,30,.85);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:36px 32px;transition:all .3s}
+.pain-card{background:rgba(28,32,40,.85);border:1px solid rgba(255,255,255,.1);border-radius:18px;padding:36px 32px;transition:all .3s}
 .pain-card:hover{border-color:rgba(255,255,255,.18);transform:translateY(-3px);box-shadow:0 16px 48px rgba(0,0,0,.25)}
 .pain-num{font-size:48px;font-weight:900;letter-spacing:-2px;line-height:1;margin-bottom:18px;background:linear-gradient(135deg,var(--blue3),var(--cyan));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
 .pain-card h4{font-size:18px;font-weight:700;color:#fff;margin-bottom:10px;line-height:1.3}
@@ -140,7 +165,7 @@ section{position:relative;z-index:2}
 .feature-card:hover{border-color:rgba(255,255,255,.16);background:rgba(22,22,36,.9)}
 .feature-icon{width:44px;height:44px;border-radius:12px;display:flex;align-items:center;justify-content:center;margin-bottom:16px;font-size:18px;font-weight:800}
 .feature-icon svg{width:22px;height:22px;stroke-width:1.8}
-.feature-icon.blue{background:rgba(43,142,175,.12);color:var(--cyan)}
+.feature-icon.blue{background:rgba(212,160,23,.12);color:var(--cyan)}
 .feature-icon.orange{background:rgba(249,115,22,.12);color:var(--orange)}
 .feature-card h4{font-size:16px;font-weight:700;color:#fff;margin-bottom:8px}
 .feature-card p{font-size:13px;color:var(--g400);line-height:1.65}
@@ -156,7 +181,7 @@ section{position:relative;z-index:2}
 .method-steps::before{content:'';position:absolute;left:28px;top:0;bottom:0;width:2px;background:linear-gradient(180deg,var(--blue2),var(--cyan),var(--blue2));opacity:.3}
 .method-step{display:flex;gap:32px;align-items:flex-start;padding:36px 0;position:relative}
 .method-step + .method-step{border-top:1px solid rgba(255,255,255,.05)}
-.method-num{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--blue1),var(--blue2));border:1px solid rgba(43,142,175,.3);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--cyan);flex-shrink:0;position:relative;z-index:2}
+.method-num{width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,var(--blue1),var(--blue2));border:1px solid rgba(212,160,23,.3);display:flex;align-items:center;justify-content:center;font-size:22px;font-weight:800;color:var(--cyan);flex-shrink:0;position:relative;z-index:2}
 .method-body h5{font-size:18px;font-weight:700;color:#fff;margin-bottom:8px;line-height:1.4}
 .method-body p{font-size:15px;color:var(--g400);line-height:1.7;max-width:540px}
 
@@ -164,7 +189,7 @@ section{position:relative;z-index:2}
 .pricing-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:48px;align-items:stretch}
 .price-card{background:var(--card);border:1px solid var(--card-border);border-radius:20px;padding:40px 32px;display:flex;flex-direction:column;transition:all .35s;position:relative}
 .price-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(0,0,0,.3)}
-.price-card.featured{border:1px solid rgba(43,142,175,.3);box-shadow:0 0 60px rgba(43,142,175,.08),0 0 0 1px rgba(43,142,175,.15)}
+.price-card.featured{border:1px solid rgba(212,160,23,.3);box-shadow:0 0 60px rgba(212,160,23,.08),0 0 0 1px rgba(212,160,23,.15)}
 .price-card.featured::before{content:'';position:absolute;inset:-1px;border-radius:20px;padding:1px;background:linear-gradient(135deg,var(--blue2),var(--cyan),var(--blue2));-webkit-mask:linear-gradient(#fff 0 0) content-box,linear-gradient(#fff 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
 .price-card-label{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:16px;text-align:center}
 .price-card-label.cyan{color:var(--cyan)}
@@ -180,11 +205,11 @@ section{position:relative;z-index:2}
 .price-promo{font-size:12px;color:var(--cyan);font-weight:600;margin-bottom:24px;min-height:18px;text-align:center}
 .price-features{list-style:none;display:flex;flex-direction:column;gap:12px;margin-bottom:32px;flex:1}
 .price-features li{font-size:13px;color:var(--g300);display:flex;align-items:flex-start;gap:10px;line-height:1.5}
-.price-features li::before{content:'';width:16px;height:16px;border-radius:50%;flex-shrink:0;margin-top:2px;background:rgba(43,142,175,.15)}
+.price-features li::before{content:'';width:16px;height:16px;border-radius:50%;flex-shrink:0;margin-top:2px;background:rgba(212,160,23,.15)}
 .price-card.orange-theme .price-features li::before{background:rgba(249,115,22,.15)}
 .price-btn{width:100%;padding:14px;border-radius:12px;font-size:14px;font-weight:700;font-family:inherit;cursor:pointer;text-align:center;text-decoration:none;display:block;transition:all .3s;border:none}
 .price-btn.primary{background:linear-gradient(135deg,var(--blue2),var(--cyan));color:#fff !important;-webkit-text-fill-color:#fff !important}
-.price-btn.primary:hover{box-shadow:0 8px 30px rgba(43,142,175,.3);transform:translateY(-1px)}
+.price-btn.primary:hover{box-shadow:0 8px 30px rgba(212,160,23,.3);transform:translateY(-1px)}
 .price-btn.outline{background:transparent;border:1px solid var(--g700);color:var(--g400)}
 .price-btn.outline:hover{border-color:var(--g500);color:#fff}
 .price-btn.disabled{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.06);color:var(--g600);cursor:not-allowed}
@@ -192,7 +217,7 @@ section{position:relative;z-index:2}
 /* ===== FAQ ===== */
 .faq-list{max-width:720px;margin:48px auto 0;display:flex;flex-direction:column;gap:2px}
 .faq-item{border-radius:14px;overflow:hidden;transition:background .2s}
-.faq-q{width:100%;padding:22px 24px;background:rgba(18,18,30,.6);border:1px solid rgba(255,255,255,.06);border-radius:14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .25s;font-family:inherit}
+.faq-q{width:100%;padding:22px 24px;background:rgba(28,32,40,.6);border:1px solid rgba(255,255,255,.06);border-radius:14px;display:flex;align-items:center;justify-content:space-between;cursor:pointer;transition:all .25s;font-family:inherit}
 .faq-q:hover{background:rgba(24,24,40,.8);border-color:rgba(255,255,255,.1)}
 .faq-q span{font-size:15px;font-weight:600;color:#fff;text-align:left}
 .faq-q .arrow{width:20px;height:20px;display:flex;align-items:center;justify-content:center;color:var(--g500);transition:transform .3s;flex-shrink:0;margin-left:16px}
@@ -202,7 +227,7 @@ section{position:relative;z-index:2}
 
 /* ===== FINAL CTA ===== */
 .final-cta{padding:120px 0;text-align:center;position:relative;overflow:hidden}
-.final-cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(43,142,175,.08),transparent 70%);pointer-events:none}
+.final-cta-glow{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:600px;height:400px;background:radial-gradient(ellipse,rgba(212,160,23,.08),transparent 70%);pointer-events:none}
 .final-cta h2{font-size:48px;font-weight:900;letter-spacing:-2px;margin-bottom:18px;line-height:1.1}
 .final-cta p{font-size:17px;color:var(--g400);margin-bottom:36px;line-height:1.7;max-width:500px;margin-left:auto;margin-right:auto}
 .final-cta-btns{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
@@ -249,6 +274,8 @@ section{position:relative;z-index:2}
 
 <!-- Grid BG -->
 <div class="grid-bg"></div>
+<div class="aurora-bg"></div>
+<div class="scanline"></div>
 
 <!-- Particle Canvas -->
 <canvas id="circuit-canvas"></canvas>
@@ -272,14 +299,20 @@ section{position:relative;z-index:2}
 </nav>
 
 <!-- HERO -->
-<section class="hero">
-  <div class="hero-glow-1"></div>
-  <div class="hero-glow-2"></div>
-  <div class="hero-glow-3"></div>
+<section class="hero" id="hero-parallax">
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
   <div class="container">
     <div class="hero-content">
       <div class="hero-badge reveal"><span class="dot"></span> Tech & AI for Retail Ecosystems</div>
-      <h1 class="reveal reveal-d1">Ferramentas inteligentes para <span class="accent">marketplaces brasileiros.</span></h1>
+      <h1 class="reveal reveal-d1 split-reveal" style="perspective:800px">
+        <span style="animation-delay:.1s">Ferramentas&nbsp;</span>
+        <span class="gold-text" style="animation-delay:.25s;-webkit-text-fill-color:transparent">inteligentes</span>
+        <span style="animation-delay:.4s">&nbsp;para</span>
+        <br>
+        <span class="gold-text" style="animation-delay:.55s;-webkit-text-fill-color:transparent;white-space:nowrap">marketplaces brasileiros.</span>
+      </h1>
       <p class="hero-sub reveal reveal-d2">Tributos complexos, comissões variáveis, margens apertadas. Construímos as ferramentas que faltavam para vendedores tomarem decisões com dados reais.</p>
       <div class="hero-ctas reveal reveal-d3">
         <a href="https://pricelab.vimacorp.com.br?plano=pacote" class="btn-primary">Começar gratuitamente <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
@@ -298,12 +331,36 @@ section{position:relative;z-index:2}
   </div>
 </section>
 
+<!-- TICKER DE CREDIBILIDADE -->
+<div class="container">
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span>Precificação fiscal auditável</span>
+      <span>Apuração mensal padrão SPED</span>
+      <span>ICMS-ST por NCM</span>
+      <span>Simples · Presumido · Lucro Real</span>
+      <span>9 marketplaces integrados</span>
+      <span>IRPJ · CSLL · PIS · COFINS · ICMS · IPI</span>
+      <span>Mercado Livre OAuth oficial</span>
+      <span>Inteligência de sourcing com IA</span>
+      <span>Precificação fiscal auditável</span>
+      <span>Apuração mensal padrão SPED</span>
+      <span>ICMS-ST por NCM</span>
+      <span>Simples · Presumido · Lucro Real</span>
+      <span>9 marketplaces integrados</span>
+      <span>IRPJ · CSLL · PIS · COFINS · ICMS · IPI</span>
+      <span>Mercado Livre OAuth oficial</span>
+      <span>Inteligência de sourcing com IA</span>
+    </div>
+  </div>
+</div>
+
 <!-- ECOSYSTEM -->
 <section id="ecossistema" class="section-pad">
   <div class="container">
     <div class="reveal">
       <div class="section-label">Ecossistema VIMA CORP</div>
-      <h2 class="section-title">Duas ferramentas, um objetivo:<br>lucro real nos marketplaces.</h2>
+      <h2 class="section-title">Duas ferramentas, um objetivo:<br><span class="gold-text">lucro real</span> nos marketplaces.</h2>
       <p class="section-sub">Cada ferramenta resolve um desafio crítico dos marketplaces brasileiros. Juntas, cobrem da seleção de produtos à precificação final.</p>
     </div>
     <div class="eco-grid">
@@ -698,7 +755,7 @@ section{position:relative;z-index:2}
           const mx=(neurons[i].x+neurons[j].x)/2,my=(neurons[i].y+neurons[j].y)/2;
           const px=-(neurons[i].y-neurons[j].y)/d,py=(neurons[i].x-neurons[j].x)/d;
           const ca=Math.sin(i*j*.1)*18;
-          ctx.strokeStyle=`rgba(43,142,175,${alpha})`;
+          ctx.strokeStyle=`rgba(212,160,23,${alpha})`;
           ctx.lineWidth=.4;
           ctx.beginPath();
           ctx.moveTo(neurons[i].x,neurons[i].y);
@@ -804,6 +861,24 @@ section{position:relative;z-index:2}
         item.classList.add('open');
         answer.style.maxHeight=answer.scrollHeight+'px';
       }
+    });
+  });
+})();
+</script>
+
+<script>
+// Parallax dos orbs no hero (v9.66)
+(function(){
+  const hero = document.getElementById('hero-parallax');
+  if(!hero) return;
+  const orbs = hero.querySelectorAll('.orb');
+  hero.addEventListener('mousemove', (e) => {
+    const rect = hero.getBoundingClientRect();
+    const x = (e.clientX - rect.left - rect.width/2) / rect.width;
+    const y = (e.clientY - rect.top - rect.height/2) / rect.height;
+    orbs.forEach((orb, i) => {
+      const intensity = (i+1) * 10;
+      orb.style.translate = (x * intensity) + 'px ' + (y * intensity) + 'px';
     });
   });
 })();
