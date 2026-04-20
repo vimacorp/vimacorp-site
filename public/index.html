@@ -58,6 +58,75 @@ img{max-width:100%;display:block}
 .ticker-track span{display:inline-flex;align-items:center;gap:10px}
 .ticker-track span::before{content:'';width:5px;height:5px;border-radius:50%;background:#8B6914}
 
+/* ===== HERO SPLIT LAYOUT + MOCKUP DO PRODUTO ===== */
+.hero-content{max-width:none !important;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:60px;align-items:center;width:100%}
+@media (max-width:900px){.hero-content{grid-template-columns:1fr;gap:40px}}
+.hero-text{position:relative;z-index:2;max-width:540px}
+.hero-visual{position:relative;z-index:2;width:100%;max-width:640px;justify-self:end}
+@media (max-width:900px){.hero-visual{justify-self:start;max-width:100%}}
+.hero .hero-ctas{margin-bottom:40px}
+.hero .trust-logos{justify-content:flex-start;gap:14px}
+.hero .trust-label{text-align:left;margin-left:0}
+
+/* ===== BROWSER MOCKUP ===== */
+.browser-mockup{background:#FFFFFF;border-radius:14px;border:1px solid rgba(139,105,20,.14);box-shadow:0 32px 80px rgba(26,26,26,.12),0 4px 18px rgba(139,105,20,.08),0 0 0 1px rgba(255,255,255,.7) inset;overflow:hidden;position:relative;animation:mockupFloat 8s ease-in-out infinite;will-change:transform}
+@keyframes mockupFloat{0%,100%{transform:translateY(0) rotateX(0)}50%{transform:translateY(-12px) rotateX(.5deg)}}
+.browser-bar{background:#F7F5F0;border-bottom:1px solid rgba(139,105,20,.1);padding:10px 14px;display:flex;align-items:center;gap:10px}
+.browser-dots{display:flex;gap:6px}
+.browser-dots span{width:10px;height:10px;border-radius:50%}
+.browser-dots span:nth-child(1){background:#ff5f57}
+.browser-dots span:nth-child(2){background:#ffbd2e}
+.browser-dots span:nth-child(3){background:#28c840}
+.browser-url{flex:1;background:#FFFFFF;border:1px solid rgba(139,105,20,.1);border-radius:6px;padding:5px 12px;font-size:11px;color:#5A5A5A;font-family:'SF Mono',Monaco,monospace;letter-spacing:.2px;display:flex;align-items:center;gap:6px}
+.browser-url::before{content:'🔒';font-size:10px;opacity:.6}
+
+/* ===== MOCKUP: Painel de Operacao ===== */
+.mock-top{background:#0B0F14;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;color:#fff}
+.mock-brand{display:flex;align-items:center;gap:9px}
+.mock-logo{width:26px;height:26px;border-radius:6px;background:linear-gradient(135deg,#D4A017,#F4C430);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:900;color:#0B0F14}
+.mock-brand-text{font-size:13px;font-weight:800;color:#F4C430;letter-spacing:-.3px}
+.mock-empresa{font-size:10px;background:rgba(212,160,23,.12);border:1px solid rgba(212,160,23,.25);color:#F4C430;padding:4px 10px;border-radius:6px;font-weight:600;letter-spacing:.3px;text-transform:uppercase}
+.mock-body{display:grid;grid-template-columns:150px 1fr;min-height:380px;background:#FAFBFC}
+.mock-sidebar{background:#0B0F14;padding:14px 0;border-right:1px solid rgba(212,160,23,.08)}
+.mock-sb-section{font-size:8px;color:rgba(212,160,23,.5);text-transform:uppercase;letter-spacing:1.6px;font-weight:800;padding:10px 16px 6px}
+.mock-sb-item{padding:7px 16px;font-size:11px;color:rgba(247,245,240,.72);display:flex;align-items:center;gap:8px;cursor:pointer;border-left:3px solid transparent;font-weight:500}
+.mock-sb-item .ic{width:16px;height:16px;border-radius:4px;background:rgba(255,255,255,.05);display:flex;align-items:center;justify-content:center;font-size:9px;color:rgba(255,255,255,.6)}
+.mock-sb-item.active{color:#F4C430;background:linear-gradient(90deg,rgba(212,160,23,.14),transparent);border-left-color:#D4A017;font-weight:700}
+.mock-sb-item.active .ic{background:linear-gradient(135deg,#D4A017,#F4C430);color:#0B0F14}
+.mock-main{padding:20px 22px;color:#0F0F0F;min-width:0}
+.mock-h1{font-size:18px;font-weight:800;letter-spacing:-.4px;margin-bottom:4px}
+.mock-sub{font-size:11px;color:#5A5A5A;margin-bottom:16px;line-height:1.5}
+.mock-card-empresa{background:#FFFFFF;border:1px solid rgba(139,105,20,.1);border-radius:10px;padding:16px;box-shadow:0 1px 2px rgba(15,23,42,.03);margin-bottom:14px}
+.mock-empresa-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;gap:10px;flex-wrap:wrap}
+.mock-empresa-nome{font-size:13px;font-weight:800;color:#0F0F0F;letter-spacing:-.2px}
+.mock-empresa-cnpj{font-size:9px;color:#6A6A6A;font-family:Monaco,monospace}
+.mock-regime-pill{font-size:8px;font-weight:800;color:#8B6914;background:rgba(212,160,23,.12);border:1px solid rgba(139,105,20,.2);padding:3px 8px;border-radius:4px;letter-spacing:.5px;text-transform:uppercase}
+.mock-metrics{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.mock-metric{background:#FAFAF7;border:1px solid rgba(139,105,20,.08);border-radius:8px;padding:8px 10px}
+.mock-metric-label{font-size:7px;color:#6A6A6A;font-weight:800;text-transform:uppercase;letter-spacing:.8px;margin-bottom:3px;line-height:1.3}
+.mock-metric-value{font-size:14px;font-weight:800;letter-spacing:-.4px;color:#0F0F0F}
+.mock-metric-value.gold{background:linear-gradient(135deg,#8B6914,#D4A017);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.mock-metric-value.green{color:#15803d}
+.mock-metric-sub{font-size:8px;color:#8A8A8A;margin-top:2px;line-height:1.3}
+.mock-alert{background:linear-gradient(90deg,rgba(234,88,12,.06),rgba(234,88,12,0));border-left:3px solid #ea580c;padding:8px 12px;border-radius:6px;display:flex;align-items:center;gap:8px;font-size:10px;color:#9a3412;font-weight:600;margin-top:10px}
+.mock-alert::before{content:'⚠️';font-size:11px}
+.mock-dec-tag{display:inline-flex;gap:5px;margin-top:8px;flex-wrap:wrap}
+.mock-dec-tag span{font-size:7.5px;font-weight:700;color:#166534;background:#dcfce7;padding:2px 7px;border-radius:3px;letter-spacing:.3px;text-transform:uppercase}
+.mock-dec-tag span.warn{color:#92400e;background:#fef3c7}
+
+/* ===== SECTION MOCKUP ESCURO (variação pra dentro das eco-cards) ===== */
+.mock-dark{background:#0B0F14}
+.mock-dark .mock-main{background:#0B0F14;color:#F7F5F0}
+.mock-dark .mock-h1{color:#F7F5F0}
+.mock-dark .mock-sub{color:#8A8A8A}
+.mock-dark .mock-card-empresa{background:rgba(28,32,40,.6);border-color:rgba(212,160,23,.1)}
+.mock-dark .mock-empresa-nome{color:#F7F5F0}
+.mock-dark .mock-empresa-cnpj{color:#8A8A8A}
+.mock-dark .mock-metric{background:rgba(255,255,255,.02);border-color:rgba(212,160,23,.08)}
+.mock-dark .mock-metric-label{color:#8A8A8A}
+.mock-dark .mock-metric-value{color:#F7F5F0}
+
+
 /* ===== SCROLL REVEAL ===== */
 .reveal{opacity:0;transform:translateY(32px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.visible{opacity:1;transform:translateY(0)}
@@ -305,27 +374,98 @@ section{position:relative;z-index:2}
   <div class="orb orb-3"></div>
   <div class="container">
     <div class="hero-content">
-      <div class="hero-badge reveal"><span class="dot"></span> Tech & AI for Retail Ecosystems</div>
-      <h1 class="reveal reveal-d1 split-reveal" style="perspective:800px">
-        <span style="animation-delay:.1s">Ferramentas </span>
-        <span class="gold-text" style="animation-delay:.25s;-webkit-text-fill-color:transparent">inteligentes</span>
-        <br>
-        <span style="animation-delay:.4s">para marketplaces </span>
-        <span class="gold-text" style="animation-delay:.55s;-webkit-text-fill-color:transparent">brasileiros</span>
-        <span style="animation-delay:.6s;color:#0F0F0F">.</span>
-      </h1>
-      <p class="hero-sub reveal reveal-d2">Tributos complexos, comissões variáveis, margens apertadas. Construímos as ferramentas que faltavam para vendedores tomarem decisões com dados reais.</p>
-      <div class="hero-ctas reveal reveal-d3">
-        <a href="https://pricelab.vimacorp.com.br?plano=pacote" class="btn-primary">Começar gratuitamente <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a href="#ecossistema" class="btn-secondary">Conhecer o ecossistema <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <div class="hero-text">
+        <div class="hero-badge reveal"><span class="dot"></span> Tech & AI for Retail Ecosystems</div>
+        <h1 class="reveal reveal-d1 split-reveal" style="perspective:800px">
+          <span style="animation-delay:.1s">Ferramentas </span>
+          <span class="gold-text" style="animation-delay:.25s;-webkit-text-fill-color:transparent">inteligentes</span>
+          <br>
+          <span style="animation-delay:.4s">para marketplaces </span>
+          <span class="gold-text" style="animation-delay:.55s;-webkit-text-fill-color:transparent">brasileiros</span>
+          <span style="animation-delay:.6s;color:#0F0F0F">.</span>
+        </h1>
+        <p class="hero-sub reveal reveal-d2">Tributos complexos, comissões variáveis, margens apertadas. Construímos as ferramentas que faltavam para vendedores tomarem decisões com dados reais.</p>
+        <div class="hero-ctas reveal reveal-d3">
+          <a href="https://pricelab.vimacorp.com.br?plano=pacote" class="btn-primary">Começar gratuitamente <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+          <a href="#ecossistema" class="btn-secondary">Conhecer o ecossistema <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 3v10m0 0l-4-4m4 4l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        </div>
+        <div class="reveal reveal-d3">
+          <div class="trust-label" style="margin-bottom:14px">Integrado com os maiores marketplaces</div>
+          <div class="trust-logos">
+            <div class="trust-logo-card"><img src="logos/ml.png" alt="Mercado Livre" loading="lazy"></div>
+            <div class="trust-logo-card"><img src="logos/amazon.png" alt="Amazon" loading="lazy"></div>
+            <div class="trust-logo-card"><img src="logos/shopee.png" alt="Shopee" loading="lazy"></div>
+            <div class="trust-logo-card"><img src="logos/tiktok.png" alt="TikTok Shop" loading="lazy"></div>
+          </div>
+        </div>
       </div>
-      <div style="margin-top:48px" class="reveal reveal-d3">
-        <div class="trust-label" style="margin-bottom:16px">Integrado com os maiores marketplaces do Brasil</div>
-        <div class="trust-logos">
-          <div class="trust-logo-card"><img src="logos/ml.png" alt="Mercado Livre" loading="lazy"></div>
-          <div class="trust-logo-card"><img src="logos/amazon.png" alt="Amazon" loading="lazy"></div>
-          <div class="trust-logo-card"><img src="logos/shopee.png" alt="Shopee" loading="lazy"></div>
-          <div class="trust-logo-card"><img src="logos/tiktok.png" alt="TikTok Shop" loading="lazy"></div>
+
+      <!-- MOCKUP DO PRODUTO -->
+      <div class="hero-visual reveal reveal-d2">
+        <div class="browser-mockup">
+          <div class="browser-bar">
+            <div class="browser-dots"><span></span><span></span><span></span></div>
+            <div class="browser-url">pricelab.vimacorp.com.br/painel</div>
+          </div>
+          <div class="mock-top">
+            <div class="mock-brand">
+              <div class="mock-logo">PL</div>
+              <div class="mock-brand-text">PRICELAB</div>
+            </div>
+            <div class="mock-empresa">Vitorinni Company</div>
+          </div>
+          <div class="mock-body">
+            <div class="mock-sidebar">
+              <div class="mock-sb-section">Início</div>
+              <div class="mock-sb-item active"><span class="ic">◈</span>Painel</div>
+              <div class="mock-sb-section">Fluxo</div>
+              <div class="mock-sb-item"><span class="ic">₡</span>Custos</div>
+              <div class="mock-sb-item"><span class="ic">$</span>Precificação</div>
+              <div class="mock-sb-item"><span class="ic">◎</span>Visão Geral</div>
+              <div class="mock-sb-item"><span class="ic">▤</span>RCPT</div>
+              <div class="mock-sb-section">Inteligência</div>
+              <div class="mock-sb-item"><span class="ic">⤴</span>Preditivo</div>
+              <div class="mock-sb-item"><span class="ic">↺</span>Calc. Reversa</div>
+              <div class="mock-sb-item"><span class="ic">✦</span>Central</div>
+            </div>
+            <div class="mock-main">
+              <div class="mock-h1">Painel de Operação</div>
+              <div class="mock-sub">Configuração fiscal, integridade dos dados e próxima ação.</div>
+              <div class="mock-card-empresa">
+                <div class="mock-empresa-head">
+                  <div>
+                    <div class="mock-empresa-nome">JVM EMPREENDIMENTOS LTDA</div>
+                    <div class="mock-empresa-cnpj">CNPJ 58.980.172/0001-59 · UF SP</div>
+                  </div>
+                  <span class="mock-regime-pill">Lucro Real</span>
+                </div>
+                <div class="mock-metrics">
+                  <div class="mock-metric">
+                    <div class="mock-metric-label">Fat 12m</div>
+                    <div class="mock-metric-value">R$ 1,5M</div>
+                  </div>
+                  <div class="mock-metric">
+                    <div class="mock-metric-label">Carga tributária</div>
+                    <div class="mock-metric-value gold">11,72%</div>
+                  </div>
+                  <div class="mock-metric">
+                    <div class="mock-metric-label">Lucro real anual</div>
+                    <div class="mock-metric-value green">R$ 265k</div>
+                    <div class="mock-metric-sub">Margem 17,7%</div>
+                  </div>
+                  <div class="mock-metric">
+                    <div class="mock-metric-label">Crédito PIS/COFINS</div>
+                    <div class="mock-metric-value">R$ 29k</div>
+                  </div>
+                </div>
+                <div class="mock-dec-tag">
+                  <span>✓ Mensal c/ saldo credor</span>
+                  <span class="warn">⚠ Adicional IRPJ 10%</span>
+                </div>
+              </div>
+              <div class="mock-alert">2 produtos sem preço em nenhum marketplace</div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
